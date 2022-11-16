@@ -33,6 +33,8 @@ public @interface DynamicField {
 
     /**
      * Provide a list of possible values for this field. Useful if field is restricted to a set of values.
+     * <p>
+     * Note that if this is specified, then {@link #enumChoices()} should not be specified.
      */
     String[] choices() default {};
 
