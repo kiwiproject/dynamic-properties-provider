@@ -20,7 +20,7 @@ public @interface EnumUnit {
     Class<? extends Enum<?>> value();
 
     /**
-     * Default value from {@code value} for the field.
+     * Default value from {@code value} for the field. Must be a valid enum constant.
      */
     String defaultValue() default "";
 }
