@@ -40,6 +40,8 @@ public @interface DynamicField {
 
     /**
      * Provide a list of possible values for this field from an enum source. Useful if field is restricted to a set of values.
+     * <p>
+     * Note that if this is specified, then {@link #choices()} should not be specified.
      */
     Class<? extends Enum<?>> enumChoices() default NullEnum.class;
 }
