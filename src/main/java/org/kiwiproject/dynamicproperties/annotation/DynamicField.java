@@ -1,10 +1,12 @@
-package org.kiwiproject.dynamicproperties;
+package org.kiwiproject.dynamicproperties.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import org.kiwiproject.dynamicproperties.NullEnum;
 
 /**
  * Annotation that indicates a class field is discoverable as dynamic.
@@ -30,7 +32,12 @@ public @interface DynamicField {
     String label() default "";
 
     /**
-     * Provide a list of possible values for this field. Useful if field is an enum or restricted to a set of values.
+     * Provide a list of possible values for this field. Useful if field is restricted to a set of values.
      */
-    String[] choices();
+    String[] choices() default {};
+
+    /**
+     * Provide a list of possible values for this field from an enum source. Useful if field is restricted to a set of values.
+     */
+    Class<? extends Enum<?>> enumChoices() default NullEnum.class;
 }
