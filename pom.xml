@@ -17,13 +17,13 @@
     <description>
         Library to assist in generating dynamic field definitions.
     </description>
-    <url>https://github.com/chrisrohr/dynamic-properties-provider</url>
+    <url>https://github.com/kiwiproject/dynamic-properties-provider</url>
     <inceptionYear>2022</inceptionYear>
 
     <scm>
-        <connection>scm:git:https://github.com/chrisrohr/dynamic-properties-provider.git</connection>
-        <developerConnection>scm:git:git@github.com:chrisrohr/dynamic-properties-provider.git</developerConnection>
-        <url>https://github.com/chrisrohr/dynamic-properties-provider</url>
+        <connection>scm:git:https://github.com/kiwiproject/dynamic-properties-provider.git</connection>
+        <developerConnection>scm:git:git@github.com:kiwiproject/dynamic-properties-provider.git</developerConnection>
+        <url>https://github.com/kiwiproject/dynamic-properties-provider</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -35,6 +35,9 @@
         <!-- Versions for test dependencies -->
 
         <!-- Sonar properties -->
+        <sonar.projectKey>kiwiproject_dynamic-properties-provider</sonar.projectKey>
+        <sonar.organization>kiwiproject</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencyManagement>

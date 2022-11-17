@@ -6,8 +6,10 @@ updates:
       interval: "daily"
     assignees:
       - "chrisrohr"
+      - "sleberknight"
     reviewers:
       - "chrisrohr"
+      - "sleberknight"
     open-pull-requests-limit: 10
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -15,5 +17,7 @@ updates:
       interval: "daily"
     assignees:
       - "chrisrohr"
+      - "sleberknight"
     reviewers:
       - "chrisrohr"
+      - "sleberknight"
