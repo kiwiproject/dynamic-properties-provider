@@ -102,6 +102,28 @@ class PropertyExtractorTest {
                     .defaultUnit("LBS")
                     .build();
 
+            var heightProperty = Property.builder()
+                    .name("height")
+                    .label("")
+                    .type("Double")
+                    .required(false)
+                    .visible(true)
+                    .editable(true)
+                    .units(List.of("ft", "m"))
+                    .defaultUnit("")
+                    .build();
+
+            var backpackWeightProperty = Property.builder()
+                    .name("backpackWeight")
+                    .label("")
+                    .type("Double")
+                    .required(false)
+                    .visible(true)
+                    .editable(true)
+                    .units(List.of("LBS", "G", "KG"))
+                    .defaultUnit("")
+                    .build();
+
             assertThat(properties)
                     .usingRecursiveFieldByFieldElementComparator()
                     .containsExactlyInAnyOrderElementsOf(List.of(
@@ -112,7 +134,9 @@ class PropertyExtractorTest {
                        educationLevelProperty,
                        favoriteSubjectProperty,
                        distanceFromSchoolProperty,
-                       weightProperty
+                       weightProperty,
+                       heightProperty,
+                       backpackWeightProperty
                     ));
         }
 

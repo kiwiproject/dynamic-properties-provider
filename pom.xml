@@ -32,7 +32,11 @@
         <kiwi.version>2.3.0</kiwi.version>
         <kiwi-bom.version>0.23.1</kiwi-bom.version>
 
+        <!-- Versions for provided dependencies -->
+        <jakarta.ws.rs-api.version>2.1.6</jakarta.ws.rs-api.version>
+
         <!-- Versions for test dependencies -->
+        <kiwi-test.version>2.3.0</kiwi-test.version>
 
         <!-- Sonar properties -->
         <sonar.projectKey>kiwiproject_dynamic-properties-provider</sonar.projectKey>
@@ -62,9 +66,32 @@
         </dependency>
 
         <!-- Provided dependencies -->
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>${jakarta.ws.rs-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Test dependencies -->
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-testing</artifactId>
+            <scope>test</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kiwiproject</groupId>
+            <artifactId>kiwi-test</artifactId>
+            <version>${kiwi-test.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>
