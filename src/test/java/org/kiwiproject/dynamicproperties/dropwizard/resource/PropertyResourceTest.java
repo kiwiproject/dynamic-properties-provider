@@ -1,6 +1,5 @@
 package org.kiwiproject.dynamicproperties.dropwizard.resource;
 
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.kiwiproject.test.jaxrs.JaxrsTestHelper.assertNotFoundResponse;
 import static org.kiwiproject.test.jaxrs.JaxrsTestHelper.assertOkResponse;
 
@@ -12,9 +11,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kiwiproject.dynamicproperties.data.Student;
-import org.kiwiproject.jaxrs.KiwiResponses;
-import org.kiwiproject.test.assertj.KiwiAssertJ;
-import org.kiwiproject.test.assertj.jsonassert.JSONAssertSoftAssertions;
 import org.kiwiproject.test.util.Fixtures;
 import org.skyscreamer.jsonassert.JSONAssert;
 

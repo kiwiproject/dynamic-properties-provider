@@ -106,6 +106,35 @@
             ],
             "defaultUnit": "LBS",
             "values": []
+        },
+        {
+            "name": "height",
+            "label": "",
+            "type": "Double",
+            "required": false,
+            "visible": true,
+            "editable": true,
+            "units": [
+                "ft",
+                "m"
+            ],
+            "defaultUnit": "",
+            "values": []
+        },
+        {
+            "name": "backpackWeight",
+            "label": "",
+            "type": "Double",
+            "required": false,
+            "visible": true,
+            "editable": true,
+            "units": [
+                "LBS",
+                "G",
+                "KG"
+            ],
+            "defaultUnit": "",
+            "values": []
         }
     ]
 }

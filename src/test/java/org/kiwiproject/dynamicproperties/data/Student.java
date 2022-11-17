@@ -44,4 +44,12 @@ public class Student {
     @EnumUnit(value = WeightUnit.class, defaultValue = "LBS")
     private Double weight;
 
+    @DynamicField
+    @Unit(value = { "ft", "m" })
+    private Double height;
+
+    @DynamicField
+    @EnumUnit(WeightUnit.class)
+    private Double backpackWeight;
+
 }
