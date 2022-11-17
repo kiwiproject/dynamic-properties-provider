@@ -6,8 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.kiwiproject.dynamicproperties.NullEnum;
-
 /**
  * Annotation that indicates a class field is discoverable as dynamic.
  */

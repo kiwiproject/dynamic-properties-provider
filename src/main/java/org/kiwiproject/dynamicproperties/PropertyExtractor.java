@@ -23,7 +23,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PropertyExtractor {
 
-    public static List<Property> extractAttributesFromClass(Class<?> clazz) {
+    public static List<Property> extractPropertiesFromClass(Class<?> clazz) {
         return nonStaticFieldsInHierarchy(clazz).stream()
                 .filter(field -> isNotEmpty(field.getAnnotationsByType(DynamicField.class)))
                 .map(PropertyExtractor::convertFieldToProperty)
@@ -113,7 +113,7 @@ public class PropertyExtractor {
         property.setUnits(unitList);
 
         var defaultValue = unitAnnotation.defaultValue();
-        if (isNotBlank(defaultValue) && unitList.contains(defaultValue)) {
+        if (isNotBlank(defaultValue) && !unitList.contains(defaultValue)) {
             throw new IllegalStateException("Unit default value is not a valid value.");
         }
 
@@ -125,7 +125,7 @@ public class PropertyExtractor {
         property.setUnits(unitList);
 
         var defaultValue = unitAnnotation.defaultValue();
-        if (isNotBlank(defaultValue) && unitList.contains(defaultValue)) {
+        if (isNotBlank(defaultValue) && !unitList.contains(defaultValue)) {
             throw new IllegalStateException("EnumUnit default value is not a valid value.");
         }
 
