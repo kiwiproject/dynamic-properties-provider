@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Define unit of measurement for a field based on an enum.
+ * Define unit of measurement for a field based on an enum. This can not be combined with {@link Unit}.
  */
 @Documented
 @Target(ElementType.FIELD)
