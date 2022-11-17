@@ -32,6 +32,9 @@
         <kiwi.version>2.3.0</kiwi.version>
         <kiwi-bom.version>0.23.1</kiwi-bom.version>
 
+        <!-- Versions for provided dependencies -->
+        <jakarta.ws.rs-api.version>2.1.6</jakarta.ws.rs-api.version>
+
         <!-- Versions for test dependencies -->
         <kiwi-test.version>2.3.0</kiwi-test.version>
 
@@ -64,8 +67,9 @@
 
         <!-- Provided dependencies -->
         <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-core</artifactId>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>${jakarta.ws.rs-api.version}</version>
             <scope>provided</scope>
         </dependency>
 

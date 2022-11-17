@@ -1,4 +1,4 @@
-package org.kiwiproject.dynamicproperties.dropwizard.resource;
+package org.kiwiproject.dynamicproperties.jaxrs.resource;
 
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toMap;

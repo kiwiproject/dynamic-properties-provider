@@ -1,4 +1,4 @@
-package org.kiwiproject.dynamicproperties.dropwizard.resource;
+package org.kiwiproject.dynamicproperties.jaxrs.resource;
 
 import static org.kiwiproject.test.jaxrs.JaxrsTestHelper.assertNotFoundResponse;
 import static org.kiwiproject.test.jaxrs.JaxrsTestHelper.assertOkResponse;
