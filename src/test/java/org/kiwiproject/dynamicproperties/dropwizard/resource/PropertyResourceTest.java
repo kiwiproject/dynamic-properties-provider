@@ -60,4 +60,23 @@ class PropertyResourceTest {
         }
     }
 
+    @Nested
+    class GetAllProperties {
+
+        @Test
+        void shouldReturnExtractedProperties() throws JSONException {
+            var response = RESOURCE.client()
+                    .target("/kiwi/dynamic-properties")
+                    .request()
+                    .get();
+
+            assertOkResponse(response);
+
+            var responseJson = response.readEntity(String.class);
+            var expectedJson = Fixtures.fixture("allProperties.json");
+
+            JSONAssert.assertEquals(expectedJson, responseJson, false);
+        }
+    }
+
 }

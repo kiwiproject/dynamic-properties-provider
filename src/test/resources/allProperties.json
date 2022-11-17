@@ -1,0 +1,111 @@
+{
+    "student": [
+        {
+            "name": "firstName",
+            "label": "",
+            "type": "String",
+            "required": true,
+            "visible": true,
+            "editable": true,
+            "units": null,
+            "defaultUnit": null,
+            "values": []
+        },
+        {
+            "name": "lastName",
+            "label": "",
+            "type": "String",
+            "required": false,
+            "visible": false,
+            "editable": true,
+            "units": null,
+            "defaultUnit": null,
+            "values": []
+        },
+        {
+            "name": "gpa",
+            "label": "",
+            "type": "Double",
+            "required": false,
+            "visible": true,
+            "editable": false,
+            "units": null,
+            "defaultUnit": null,
+            "values": []
+        },
+        {
+            "name": "school",
+            "label": "Currently Enrolled",
+            "type": "String",
+            "required": false,
+            "visible": true,
+            "editable": true,
+            "units": null,
+            "defaultUnit": null,
+            "values": []
+        },
+        {
+            "name": "educationLevel",
+            "label": "",
+            "type": "Education",
+            "required": false,
+            "visible": true,
+            "editable": true,
+            "units": null,
+            "defaultUnit": null,
+            "values": [
+                "HIGH_SCHOOL",
+                "BACHELOR",
+                "MASTER",
+                "PHD"
+            ]
+        },
+        {
+            "name": "favoriteSubject",
+            "label": "",
+            "type": "String",
+            "required": false,
+            "visible": true,
+            "editable": true,
+            "units": null,
+            "defaultUnit": null,
+            "values": [
+                "English",
+                "Geometry",
+                "Physics",
+                "PE",
+                "Art",
+                "Band"
+            ]
+        },
+        {
+            "name": "distanceFromSchool",
+            "label": "",
+            "type": "Double",
+            "required": false,
+            "visible": true,
+            "editable": true,
+            "units": [
+                "m",
+                "km"
+            ],
+            "defaultUnit": "km",
+            "values": []
+        },
+        {
+            "name": "weight",
+            "label": "",
+            "type": "Double",
+            "required": false,
+            "visible": true,
+            "editable": true,
+            "units": [
+                "LBS",
+                "G",
+                "KG"
+            ],
+            "defaultUnit": "LBS",
+            "values": []
+        }
+    ]
+}
