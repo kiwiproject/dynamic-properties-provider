@@ -33,6 +33,7 @@
         <kiwi-bom.version>0.23.1</kiwi-bom.version>
 
         <!-- Versions for test dependencies -->
+        <kiwi-test.version>2.3.0</kiwi-test.version>
 
         <!-- Sonar properties -->
         <sonar.projectKey>kiwiproject_dynamic-properties-provider</sonar.projectKey>
@@ -69,7 +70,24 @@
         </dependency>
 
         <!-- Test dependencies -->
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-testing</artifactId>
+            <scope>test</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kiwiproject</groupId>
+            <artifactId>kiwi-test</artifactId>
+            <version>${kiwi-test.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

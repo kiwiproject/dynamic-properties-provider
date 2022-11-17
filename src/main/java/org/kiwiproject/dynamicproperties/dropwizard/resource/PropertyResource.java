@@ -1,20 +1,23 @@
 package org.kiwiproject.dynamicproperties.dropwizard.resource;
 
 import static java.util.Objects.isNull;
+import static java.util.stream.Collectors.toMap;
 import static org.kiwiproject.base.KiwiStrings.f;
 import static org.kiwiproject.jaxrs.KiwiStandardResponses.standardNotFoundResponse;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.kiwiproject.dynamicproperties.PropertyExtractor;
 
 @Path("/kiwi/dynamic-properties")
+@Produces(MediaType.APPLICATION_JSON)
 public class PropertyResource {
 
     private final Map<String, Class<?>> dynamicPropertyClasses;
@@ -39,7 +42,9 @@ public class PropertyResource {
     @GET
     public Response getAllProperties() {
         var extractedProperties = dynamicPropertyClasses.entrySet().stream()
-            .collect(Collectors.toMap(entry -> entry.getKey(), entry -> PropertyExtractor.extractPropertiesFromClass(entry.getValue())));
+            .collect(toMap(
+                entry -> entry.getKey(), 
+                entry -> PropertyExtractor.extractPropertiesFromClass(entry.getValue())));
 
         return Response.ok(extractedProperties).build();
     }
