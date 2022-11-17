@@ -6,6 +6,7 @@ import static org.kiwiproject.base.KiwiStrings.f;
 import static org.kiwiproject.jaxrs.KiwiStandardResponses.standardNotFoundResponse;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -43,7 +44,7 @@ public class PropertyResource {
     public Response getAllProperties() {
         var extractedProperties = dynamicPropertyClasses.entrySet().stream()
             .collect(toMap(
-                entry -> entry.getKey(), 
+                Entry::getKey, 
                 entry -> PropertyExtractor.extractPropertiesFromClass(entry.getValue())));
 
         return Response.ok(extractedProperties).build();
