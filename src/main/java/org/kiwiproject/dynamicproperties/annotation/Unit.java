@@ -16,11 +16,15 @@ public @interface Unit {
 
     /**
      * Set the concrete list of units allowed for this field.
+     *
+     * @return the units for this field
      */
     String[] value();
 
     /**
      * Default value from {@code value} for the field.
+     *
+     * @return the default value, which defaults to an empty string
      */
     String defaultValue() default "";
 }

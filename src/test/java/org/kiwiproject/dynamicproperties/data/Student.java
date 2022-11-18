@@ -33,11 +33,11 @@ public class Student {
     @DynamicField
     private Education educationLevel;
 
-    @DynamicField(choices = { "English", "Geometry", "Physics", "PE", "Art", "Band" })
+    @DynamicField(choices = {"English", "Geometry", "Physics", "PE", "Art", "Band"})
     private String favoriteSubject;
 
     @DynamicField
-    @Unit(value = { "m", "km" }, defaultValue = "km")
+    @Unit(value = {"m", "km"}, defaultValue = "km")
     private Double distanceFromSchool;
 
     @DynamicField
@@ -45,7 +45,7 @@ public class Student {
     private Double weight;
 
     @DynamicField
-    @Unit(value = { "ft", "m" })
+    @Unit(value = {"ft", "m"})
     private Double height;
 
     @DynamicField

@@ -127,23 +127,23 @@ class PropertyExtractorTest {
             assertThat(properties)
                     .usingRecursiveFieldByFieldElementComparator()
                     .containsExactlyInAnyOrderElementsOf(List.of(
-                       firstNameProperty,
-                       lastNameProperty,
-                       gpaProperty,
-                       schoolProperty,
-                       educationLevelProperty,
-                       favoriteSubjectProperty,
-                       distanceFromSchoolProperty,
-                       weightProperty,
-                       heightProperty,
-                       backpackWeightProperty
+                            firstNameProperty,
+                            lastNameProperty,
+                            gpaProperty,
+                            schoolProperty,
+                            educationLevelProperty,
+                            favoriteSubjectProperty,
+                            distanceFromSchoolProperty,
+                            weightProperty,
+                            heightProperty,
+                            backpackWeightProperty
                     ));
         }
 
         class TooManyUnits {
 
             @DynamicField
-            @Unit({ "foo" })
+            @Unit({"foo"})
             @EnumUnit(Education.class)
             private String unitField;
         }
@@ -158,7 +158,7 @@ class PropertyExtractorTest {
         class InvalidUnitDefault {
 
             @DynamicField
-            @Unit(value = { "foo" }, defaultValue = "bar")
+            @Unit(value = {"foo"}, defaultValue = "bar")
             private String unitField;
         }
 

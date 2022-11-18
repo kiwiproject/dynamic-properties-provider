@@ -15,12 +15,16 @@ import java.lang.annotation.Target;
 public @interface EnumUnit {
 
     /**
-     * Set the concrete list of units allowed for this field.
+     * Set the enum class containing units allowed for this field.
+     *
+     * @return the enum type containing allowed units
      */
     Class<? extends Enum<?>> value();
 
     /**
      * Default value from {@code value} for the field. Must be a valid enum constant.
+     *
+     * @return the default enum constant name as a string, defaults to none
      */
     String defaultValue() default "";
 }
