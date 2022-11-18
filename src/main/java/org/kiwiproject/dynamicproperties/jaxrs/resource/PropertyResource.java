@@ -5,8 +5,7 @@ import static java.util.stream.Collectors.toMap;
 import static org.kiwiproject.base.KiwiStrings.f;
 import static org.kiwiproject.jaxrs.KiwiStandardResponses.standardNotFoundResponse;
 
-import java.util.Map;
-import java.util.Map.Entry;
+import org.kiwiproject.dynamicproperties.PropertyExtractor;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,8 +13,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.kiwiproject.dynamicproperties.PropertyExtractor;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @Path("/kiwi/dynamic-properties")
 @Produces(MediaType.APPLICATION_JSON)
@@ -43,9 +42,9 @@ public class PropertyResource {
     @GET
     public Response getAllProperties() {
         var extractedProperties = dynamicPropertyClasses.entrySet().stream()
-            .collect(toMap(
-                Entry::getKey, 
-                entry -> PropertyExtractor.extractPropertiesFromClass(entry.getValue())));
+                .collect(toMap(
+                        Entry::getKey,
+                        entry -> PropertyExtractor.extractPropertiesFromClass(entry.getValue())));
 
         return Response.ok(extractedProperties).build();
     }

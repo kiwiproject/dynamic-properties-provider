@@ -1,24 +1,22 @@
 package org.kiwiproject.dynamicproperties;
 
+import static java.util.Arrays.stream;
+import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.kiwiproject.reflect.KiwiReflection.nonStaticFieldsInHierarchy;
 
-import static java.util.Arrays.stream;
-import static java.util.Collections.emptyList;
-
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
+import lombok.experimental.UtilityClass;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
 import org.kiwiproject.validation.Required;
 
-import lombok.experimental.UtilityClass;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @UtilityClass
 public class PropertyExtractor {
@@ -36,14 +34,14 @@ public class PropertyExtractor {
         var dynamicFieldAnnotation = findDynamicFieldAnnotation(field);
 
         var property = Property.builder()
-            .name(field.getName())
-            .type(fieldClass.getSimpleName())
-            .values(getPossibleValuesForField(fieldClass, dynamicFieldAnnotation))
-            .visible(dynamicFieldAnnotation.visible())
-            .editable(dynamicFieldAnnotation.editable())
-            .label(dynamicFieldAnnotation.label())
-            .required(isFieldRequired(field))
-            .build();
+                .name(field.getName())
+                .type(fieldClass.getSimpleName())
+                .values(getPossibleValuesForField(fieldClass, dynamicFieldAnnotation))
+                .visible(dynamicFieldAnnotation.visible())
+                .editable(dynamicFieldAnnotation.editable())
+                .label(dynamicFieldAnnotation.label())
+                .required(isFieldRequired(field))
+                .build();
 
         addUnitInformationIfNecessary(property, field);
 
@@ -64,22 +62,22 @@ public class PropertyExtractor {
 
     private static List<String> getListFromEnum(Class<?> enumClass) {
         return stream(enumClass.getEnumConstants())
-                    .filter(val -> val instanceof Enum)
-                    .map(val -> ((Enum<?>) val).name())
-                    .collect(toList());
+                .filter(val -> val instanceof Enum)
+                .map(val -> ((Enum<?>) val).name())
+                .collect(toList());
     }
 
     private static DynamicField findDynamicFieldAnnotation(Field field) {
         return stream(field.getAnnotations())
-            .filter(annotation -> annotation instanceof DynamicField)
-            .map(annotation -> (DynamicField) annotation)
-            .findFirst()
-            .orElseThrow();
+                .filter(annotation -> annotation instanceof DynamicField)
+                .map(DynamicField.class::cast)
+                .findFirst()
+                .orElseThrow();
     }
 
     private static boolean isFieldRequired(Field field) {
         return stream(field.getAnnotations())
-            .anyMatch(annotation -> annotation instanceof Required);
+                .anyMatch(annotation -> annotation instanceof Required);
     }
 
     private static void addUnitInformationIfNecessary(Property property, Field field) {
@@ -96,16 +94,16 @@ public class PropertyExtractor {
 
     private static Optional<Unit> findUnitAnnotation(Field field) {
         return stream(field.getAnnotations())
-            .filter(annotation -> annotation instanceof Unit)
-            .map(annotation -> (Unit) annotation)
-            .findFirst();
+                .filter(annotation -> annotation instanceof Unit)
+                .map(Unit.class::cast)
+                .findFirst();
     }
 
     private static Optional<EnumUnit> findEnumUnitAnnotation(Field field) {
         return stream(field.getAnnotations())
-            .filter(annotation -> annotation instanceof EnumUnit)
-            .map(annotation -> (EnumUnit) annotation)
-            .findFirst();
+                .filter(annotation -> annotation instanceof EnumUnit)
+                .map(EnumUnit.class::cast)
+                .findFirst();
     }
 
     private static void processUnitAnnotation(Unit unitAnnotation, Property property) {
