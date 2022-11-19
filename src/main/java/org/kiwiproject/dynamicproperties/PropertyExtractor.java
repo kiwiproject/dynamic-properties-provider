@@ -11,7 +11,6 @@ import lombok.experimental.UtilityClass;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
-import org.kiwiproject.validation.Required;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -40,7 +39,7 @@ public class PropertyExtractor {
                 .visible(dynamicFieldAnnotation.visible())
                 .editable(dynamicFieldAnnotation.editable())
                 .label(dynamicFieldAnnotation.label())
-                .required(isFieldRequired(field))
+                .required(dynamicFieldAnnotation.required())
                 .build();
 
         addUnitInformationIfNecessary(property, field);
@@ -73,11 +72,6 @@ public class PropertyExtractor {
                 .map(DynamicField.class::cast)
                 .findFirst()
                 .orElseThrow();
-    }
-
-    private static boolean isFieldRequired(Field field) {
-        return stream(field.getAnnotations())
-                .anyMatch(annotation -> annotation instanceof Required);
     }
 
     private static void addUnitInformationIfNecessary(Property property, Field field) {

@@ -42,4 +42,10 @@ public @interface DynamicField {
      */
     String[] choices() default {};
 
+    /**
+     * Informs the caller if this field is required.
+     *
+     * @return true if this field should be displayed, false otherwise
+     */
+    boolean required() default false;
 }
