@@ -3,7 +3,6 @@ package org.kiwiproject.dynamicproperties.data;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
-import org.kiwiproject.validation.Required;
 
 public class Student {
 
@@ -17,8 +16,7 @@ public class Student {
 
     private Long id;
 
-    @DynamicField
-    @Required
+    @DynamicField(required = true)
     private String firstName;
 
     @DynamicField(visible = false)
