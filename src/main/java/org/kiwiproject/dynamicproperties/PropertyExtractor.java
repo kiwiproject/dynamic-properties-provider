@@ -40,6 +40,7 @@ public class PropertyExtractor {
                 .editable(dynamicFieldAnnotation.editable())
                 .label(dynamicFieldAnnotation.label())
                 .required(dynamicFieldAnnotation.required())
+                .sensitive(dynamicFieldAnnotation.sensitive())
                 .build();
 
         addUnitInformationIfNecessary(property, field);
