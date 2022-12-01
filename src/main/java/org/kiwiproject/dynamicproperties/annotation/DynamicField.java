@@ -48,4 +48,11 @@ public @interface DynamicField {
      * @return true if this field is required, false otherwise
      */
     boolean required() default false;
+
+    /**
+     * Informs the caller if this field will have a sensitive value.
+     *
+     * @return true if this field is required, false otherwise
+     */
+    boolean sensitive() default false;
 }

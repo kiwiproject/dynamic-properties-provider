@@ -4,6 +4,7 @@ import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
 
+@SuppressWarnings("unused") // This is used for tests
 public class Student {
 
     public enum Education {
@@ -49,5 +50,8 @@ public class Student {
     @DynamicField
     @EnumUnit(WeightUnit.class)
     private Double backpackWeight;
+
+    @DynamicField(sensitive = true)
+    private String studentPassword;
 
 }

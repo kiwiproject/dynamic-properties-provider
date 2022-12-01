@@ -135,6 +135,18 @@
       ],
       "defaultUnit": "",
       "values": []
+    },
+    {
+      "name": "studentPassword",
+      "label": "",
+      "type": "String",
+      "required": false,
+      "visible": true,
+      "editable": true,
+      "sensitive": true,
+      "units": null,
+      "defaultUnit": null,
+      "values": []
     }
   ]
 }

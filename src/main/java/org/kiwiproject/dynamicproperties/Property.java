@@ -17,6 +17,7 @@ public class Property {
     private boolean required;
     private boolean visible;
     private boolean editable;
+    private boolean sensitive;
 
     private List<String> units;
     private String defaultUnit;

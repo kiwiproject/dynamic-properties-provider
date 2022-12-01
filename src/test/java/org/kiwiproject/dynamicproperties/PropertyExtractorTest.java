@@ -124,6 +124,15 @@ class PropertyExtractorTest {
                     .defaultUnit("")
                     .build();
 
+            var passwordProperty = Property.builder()
+                    .name("studentPassword")
+                    .label("")
+                    .type("String")
+                    .sensitive(true)
+                    .visible(true)
+                    .editable(true)
+                    .build();
+
             assertThat(properties)
                     .usingRecursiveFieldByFieldElementComparator()
                     .containsExactlyInAnyOrderElementsOf(List.of(
@@ -136,12 +145,14 @@ class PropertyExtractorTest {
                             distanceFromSchoolProperty,
                             weightProperty,
                             heightProperty,
-                            backpackWeightProperty
+                            backpackWeightProperty,
+                            passwordProperty
                     ));
         }
 
         class TooManyUnits {
 
+            @SuppressWarnings("unused")
             @DynamicField
             @Unit({"foo"})
             @EnumUnit(Education.class)
@@ -159,6 +170,7 @@ class PropertyExtractorTest {
 
             @DynamicField
             @Unit(value = {"foo"}, defaultValue = "bar")
+            @SuppressWarnings("unused")
             private String unitField;
         }
 
@@ -173,6 +185,7 @@ class PropertyExtractorTest {
 
             @DynamicField
             @EnumUnit(value = Education.class, defaultValue = "KINDERGARTEN")
+            @SuppressWarnings("unused")
             private String unitField;
         }
 
