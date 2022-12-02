@@ -70,6 +70,16 @@ class PropertyExtractorTest {
                     .values(List.of("HIGH_SCHOOL", "BACHELOR", "MASTER", "PHD"))
                     .build();
 
+            var highestEducationLevelProperty = Property.builder()
+                    .name("highestEducationLevel")
+                    .label("")
+                    .type("String")
+                    .required(false)
+                    .visible(true)
+                    .editable(true)
+                    .values(List.of("HIGH_SCHOOL", "BACHELOR", "MASTER", "PHD"))
+                    .build();
+
             var favoriteSubjectProperty = Property.builder()
                     .name("favoriteSubject")
                     .label("")
@@ -141,6 +151,7 @@ class PropertyExtractorTest {
                             gpaProperty,
                             schoolProperty,
                             educationLevelProperty,
+                            highestEducationLevelProperty,
                             favoriteSubjectProperty,
                             distanceFromSchoolProperty,
                             weightProperty,

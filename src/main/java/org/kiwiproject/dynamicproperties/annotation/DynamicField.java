@@ -43,6 +43,14 @@ public @interface DynamicField {
     String[] choices() default {};
 
     /**
+     * Provide a list of possible values for this field by using the given Enum as the list. Useful if field is
+     * restricted to a set of values.
+     *
+     * @return the choices that should be available for this field base on the given Enum.
+     */
+    Class<? extends Enum<?>> choicesFromEnum() default NullEnum.class;
+
+    /**
      * Informs the caller if this field is required.
      *
      * @return true if this field is required, false otherwise

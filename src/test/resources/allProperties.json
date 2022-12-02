@@ -61,6 +61,22 @@
       ]
     },
     {
+      "name": "highestEducationLevel",
+      "label": "",
+      "type": "String",
+      "required": false,
+      "visible": true,
+      "editable": true,
+      "units": null,
+      "defaultUnit": null,
+      "values": [
+        "HIGH_SCHOOL",
+        "BACHELOR",
+        "MASTER",
+        "PHD"
+      ]
+    },
+    {
       "name": "favoriteSubject",
       "label": "",
       "type": "String",
