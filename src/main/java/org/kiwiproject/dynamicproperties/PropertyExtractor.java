@@ -10,6 +10,7 @@ import static org.kiwiproject.reflect.KiwiReflection.nonStaticFieldsInHierarchy;
 import lombok.experimental.UtilityClass;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
+import org.kiwiproject.dynamicproperties.annotation.NullEnum;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
 
 import java.lang.reflect.Field;
@@ -55,6 +56,10 @@ public class PropertyExtractor {
 
         if (isNotEmpty(dynamicFieldAnnotation.choices())) {
             return Arrays.asList(dynamicFieldAnnotation.choices());
+        }
+
+        if (dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
+            return getListFromEnum(dynamicFieldAnnotation.choicesFromEnum());
         }
 
         return emptyList();

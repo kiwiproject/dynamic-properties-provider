@@ -32,6 +32,9 @@ public class Student {
     @DynamicField
     private Education educationLevel;
 
+    @DynamicField(choicesFromEnum = Education.class)
+    private String highestEducationLevel;
+
     @DynamicField(choices = {"English", "Geometry", "Physics", "PE", "Art", "Band"})
     private String favoriteSubject;
 
