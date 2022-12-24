@@ -57,4 +57,6 @@ public class Student {
     @DynamicField(sensitive = true)
     private String studentPassword;
 
+    @DynamicField(placeholder = "purple")
+    private String favoriteColor;
 }
