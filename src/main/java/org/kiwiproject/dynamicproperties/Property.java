@@ -12,6 +12,7 @@ public class Property {
 
     private String name;
     private String label;
+    private String placeholder;
     private String type;
 
     private boolean required;

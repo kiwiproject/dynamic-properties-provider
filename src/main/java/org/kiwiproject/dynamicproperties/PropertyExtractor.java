@@ -40,6 +40,7 @@ public class PropertyExtractor {
                 .visible(dynamicFieldAnnotation.visible())
                 .editable(dynamicFieldAnnotation.editable())
                 .label(dynamicFieldAnnotation.label())
+                .placeholder(dynamicFieldAnnotation.placeholder())
                 .required(dynamicFieldAnnotation.required())
                 .sensitive(dynamicFieldAnnotation.sensitive())
                 .build();

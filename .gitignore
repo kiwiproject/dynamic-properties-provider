@@ -21,3 +21,4 @@ maven-central-deploy.log
 
 # VS Code configuration files
 .vscode
+.sdkmanrc

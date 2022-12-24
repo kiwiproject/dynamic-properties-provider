@@ -3,6 +3,7 @@
     {
       "name": "firstName",
       "label": "",
+      "placeholder": "",
       "type": "String",
       "required": true,
       "visible": true,
@@ -14,6 +15,7 @@
     {
       "name": "lastName",
       "label": "",
+      "placeholder": "",
       "type": "String",
       "required": false,
       "visible": false,
@@ -25,6 +27,7 @@
     {
       "name": "gpa",
       "label": "",
+      "placeholder": "",
       "type": "Double",
       "required": false,
       "visible": true,
@@ -36,6 +39,7 @@
     {
       "name": "school",
       "label": "Currently Enrolled",
+      "placeholder": "",
       "type": "String",
       "required": false,
       "visible": true,
@@ -47,6 +51,7 @@
     {
       "name": "educationLevel",
       "label": "",
+      "placeholder": "",
       "type": "Education",
       "required": false,
       "visible": true,
@@ -63,6 +68,7 @@
     {
       "name": "highestEducationLevel",
       "label": "",
+      "placeholder": "",
       "type": "String",
       "required": false,
       "visible": true,
@@ -79,6 +85,7 @@
     {
       "name": "favoriteSubject",
       "label": "",
+      "placeholder": "",
       "type": "String",
       "required": false,
       "visible": true,
@@ -97,6 +104,7 @@
     {
       "name": "distanceFromSchool",
       "label": "",
+      "placeholder": "",
       "type": "Double",
       "required": false,
       "visible": true,
@@ -111,6 +119,7 @@
     {
       "name": "weight",
       "label": "",
+      "placeholder": "",
       "type": "Double",
       "required": false,
       "visible": true,
@@ -126,6 +135,7 @@
     {
       "name": "height",
       "label": "",
+      "placeholder": "",
       "type": "Double",
       "required": false,
       "visible": true,
@@ -140,6 +150,7 @@
     {
       "name": "backpackWeight",
       "label": "",
+      "placeholder": "",
       "type": "Double",
       "required": false,
       "visible": true,
@@ -155,11 +166,25 @@
     {
       "name": "studentPassword",
       "label": "",
+      "placeholder": "",
       "type": "String",
       "required": false,
       "visible": true,
       "editable": true,
       "sensitive": true,
+      "units": null,
+      "defaultUnit": null,
+      "values": []
+    },
+    {
+      "name": "favoriteColor",
+      "label": "",
+      "placeholder": "purple",
+      "type": "String",
+      "required": false,
+      "visible": true,
+      "editable": true,
+      "sensitive": false,
       "units": null,
       "defaultUnit": null,
       "values": []

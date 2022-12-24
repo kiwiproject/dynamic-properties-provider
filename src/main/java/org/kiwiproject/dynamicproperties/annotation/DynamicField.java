@@ -36,6 +36,13 @@ public @interface DynamicField {
     String label() default "";
 
     /**
+     * Provide a placeholder value for this field.
+     *
+     * @return the placeholder value, defaults to an empty string
+     */
+    String placeholder() default "";
+
+    /**
      * Provide a list of possible values for this field. Useful if field is restricted to a set of values.
      *
      * @return the choices that should be available for this field, default is empty array

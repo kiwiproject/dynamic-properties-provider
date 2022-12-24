@@ -27,6 +27,7 @@ class PropertyExtractorTest {
             var firstNameProperty = Property.builder()
                     .name("firstName")
                     .label("")
+                    .placeholder("")
                     .type("String")
                     .required(true)
                     .visible(true)
@@ -36,6 +37,7 @@ class PropertyExtractorTest {
             var lastNameProperty = Property.builder()
                     .name("lastName")
                     .label("")
+                    .placeholder("")
                     .type("String")
                     .required(false)
                     .visible(false)
@@ -45,6 +47,7 @@ class PropertyExtractorTest {
             var gpaProperty = Property.builder()
                     .name("gpa")
                     .label("")
+                    .placeholder("")
                     .type("Double")
                     .required(false)
                     .visible(true)
@@ -54,6 +57,7 @@ class PropertyExtractorTest {
             var schoolProperty = Property.builder()
                     .name("school")
                     .label("Currently Enrolled")
+                    .placeholder("")
                     .type("String")
                     .required(false)
                     .visible(true)
@@ -63,6 +67,7 @@ class PropertyExtractorTest {
             var educationLevelProperty = Property.builder()
                     .name("educationLevel")
                     .label("")
+                    .placeholder("")
                     .type("Education")
                     .required(false)
                     .visible(true)
@@ -73,6 +78,7 @@ class PropertyExtractorTest {
             var highestEducationLevelProperty = Property.builder()
                     .name("highestEducationLevel")
                     .label("")
+                    .placeholder("")
                     .type("String")
                     .required(false)
                     .visible(true)
@@ -83,6 +89,7 @@ class PropertyExtractorTest {
             var favoriteSubjectProperty = Property.builder()
                     .name("favoriteSubject")
                     .label("")
+                    .placeholder("")
                     .type("String")
                     .required(false)
                     .visible(true)
@@ -93,6 +100,7 @@ class PropertyExtractorTest {
             var distanceFromSchoolProperty = Property.builder()
                     .name("distanceFromSchool")
                     .label("")
+                    .placeholder("")
                     .type("Double")
                     .required(false)
                     .visible(true)
@@ -104,6 +112,7 @@ class PropertyExtractorTest {
             var weightProperty = Property.builder()
                     .name("weight")
                     .label("")
+                    .placeholder("")
                     .type("Double")
                     .required(false)
                     .visible(true)
@@ -115,6 +124,7 @@ class PropertyExtractorTest {
             var heightProperty = Property.builder()
                     .name("height")
                     .label("")
+                    .placeholder("")
                     .type("Double")
                     .required(false)
                     .visible(true)
@@ -126,6 +136,7 @@ class PropertyExtractorTest {
             var backpackWeightProperty = Property.builder()
                     .name("backpackWeight")
                     .label("")
+                    .placeholder("")
                     .type("Double")
                     .required(false)
                     .visible(true)
@@ -137,8 +148,19 @@ class PropertyExtractorTest {
             var passwordProperty = Property.builder()
                     .name("studentPassword")
                     .label("")
+                    .placeholder("")
                     .type("String")
                     .sensitive(true)
+                    .visible(true)
+                    .editable(true)
+                    .build();
+
+            var favoriteColorProperty = Property.builder()
+                    .name("favoriteColor")
+                    .label("")
+                    .placeholder("purple")
+                    .type("String")
+                    .sensitive(false)
                     .visible(true)
                     .editable(true)
                     .build();
@@ -157,7 +179,8 @@ class PropertyExtractorTest {
                             weightProperty,
                             heightProperty,
                             backpackWeightProperty,
-                            passwordProperty
+                            passwordProperty,
+                            favoriteColorProperty
                     ));
         }
 
