@@ -3,6 +3,9 @@ package org.kiwiproject.dynamicproperties.annotation;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * {@inheritDoc}
+ */
 @Builder
 @Getter
 public class ChoiceImpl implements Choice {
