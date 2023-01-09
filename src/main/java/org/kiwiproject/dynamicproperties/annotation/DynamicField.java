@@ -53,9 +53,17 @@ public @interface DynamicField {
      * Provide a list of possible values for this field by using the given Enum as the list. Useful if field is
      * restricted to a set of values.
      *
-     * @return the choices that should be available for this field base on the given Enum.
+     * @return the choices that should be available for this field based on the given Enum.
      */
     Class<? extends Enum> choicesFromEnum() default NullEnum.class;
+
+    /**
+     * Provide a list of possible values with labels and enabled-ness for this field by using the given ChoiceSupplier.
+     * Useful if field is restricted to a set of values.
+     *
+     * @return the {@link Choice}s that should be available for this field.
+     */
+    Class<? extends ChoiceSupplier> choiceSupplier() default NullChoiceSupplier.class;
 
     /**
      * Informs the caller if this field is required.

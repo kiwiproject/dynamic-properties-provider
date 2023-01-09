@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.kiwiproject.dynamicproperties.data.Course;
 import org.kiwiproject.dynamicproperties.data.Student;
 import org.kiwiproject.test.util.Fixtures;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -20,7 +21,9 @@ import java.util.Map;
 @DisplayName("PropertyResource")
 class PropertyResourceTest {
 
-    private static final PropertyResource PROPERTY_RESOURCE = new PropertyResource(Map.of("student", Student.class));
+    private static final PropertyResource PROPERTY_RESOURCE = new PropertyResource(
+            Map.of("student", Student.class,
+                    "course", Course.class));
     private static final ResourceExtension RESOURCE = ResourceExtension.builder()
             .bootstrapLogging(false)
             .addResource(PROPERTY_RESOURCE)
@@ -52,6 +55,23 @@ class PropertyResourceTest {
             var expectedJson = Fixtures.fixture("studentProperties.json");
 
             JSONAssert.assertEquals(expectedJson, responseJson, false);
+        }
+
+        @Test
+        void shouldReturnChoices() throws JSONException {
+            var response = RESOURCE.client()
+                    .target("/kiwi/dynamic-properties/course")
+                    .request()
+                    .get();
+
+            assertOkResponse(response);
+
+            var responseJson = response.readEntity(String.class);
+            System.out.println(responseJson);
+            var expectedJson = Fixtures.fixture("courseProperties.json");
+
+            JSONAssert.assertEquals(expectedJson, responseJson, false);
+
         }
     }
 

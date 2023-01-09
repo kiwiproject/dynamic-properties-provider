@@ -8,16 +8,22 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.kiwiproject.reflect.KiwiReflection.nonStaticFieldsInHierarchy;
 
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
+import org.kiwiproject.dynamicproperties.annotation.Choice;
+import org.kiwiproject.dynamicproperties.annotation.ChoiceSupplier;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
+import org.kiwiproject.dynamicproperties.annotation.NullChoiceSupplier;
 import org.kiwiproject.dynamicproperties.annotation.NullEnum;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @UtilityClass
 public class PropertyExtractor {
 
@@ -50,17 +56,21 @@ public class PropertyExtractor {
         return property;
     }
 
-    private static List<String> getPossibleValuesForField(Class<?> fieldClass, DynamicField dynamicFieldAnnotation) {
-        if (fieldClass.isEnum()) {
-            return getListFromEnum(fieldClass);
-        }
-
+    private static List<?> getPossibleValuesForField(Class<?> fieldClass, DynamicField dynamicFieldAnnotation) {
         if (isNotEmpty(dynamicFieldAnnotation.choices())) {
             return Arrays.asList(dynamicFieldAnnotation.choices());
         }
 
         if (dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
             return getListFromEnum(dynamicFieldAnnotation.choicesFromEnum());
+        }
+
+        if (dynamicFieldAnnotation.choiceSupplier() != NullChoiceSupplier.class) {
+            return getListFromChoiceSupplier(dynamicFieldAnnotation.choiceSupplier());
+        }
+
+        if (fieldClass.isEnum()) {
+            return getListFromEnum(fieldClass);
         }
 
         return emptyList();
@@ -71,6 +81,15 @@ public class PropertyExtractor {
                 .filter(val -> val instanceof Enum)
                 .map(val -> ((Enum<?>) val).name())
                 .collect(toList());
+    }
+
+    private static List<Choice> getListFromChoiceSupplier(Class<? extends ChoiceSupplier> choiceSupplier) {
+        try {
+            return choiceSupplier.getDeclaredConstructor().newInstance().get();
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+            LOG.error("exception getting choices from ChoiceSupplier", e);
+            return emptyList();
+        }
     }
 
     private static DynamicField findDynamicFieldAnnotation(Field field) {

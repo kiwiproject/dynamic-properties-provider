@@ -6,12 +6,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.kiwiproject.dynamicproperties.annotation.ChoiceImpl;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
+import org.kiwiproject.dynamicproperties.data.Course;
+import org.kiwiproject.dynamicproperties.data.Department;
 import org.kiwiproject.dynamicproperties.data.Student;
 import org.kiwiproject.dynamicproperties.data.Student.Education;
 
+import java.util.Arrays;
 import java.util.List;
 
 @DisplayName("PropertyExtractor")
@@ -228,6 +232,33 @@ class PropertyExtractorTest {
             assertThatThrownBy(() -> PropertyExtractor.extractPropertiesFromClass(InvalidEnumUnitDefault.class))
                     .isInstanceOf(IllegalStateException.class)
                     .hasMessage("EnumUnit default value is not a valid value.");
+        }
+
+        @Test
+        void shouldGetValuesFromChoiceSupplier() {
+            List<Property> properties = PropertyExtractor.extractPropertiesFromClass(Course.class);
+
+            Property departmentProperty = Property.builder()
+                    .name("department")
+                    .label("")
+                    .placeholder("")
+                    .type("Department")
+                    .required(true)
+                    .visible(true)
+                    .editable(true)
+                    .sensitive(false)
+                    .units(null)
+                    .defaultUnit(null)
+                    .values(Arrays.asList(
+                            ChoiceImpl.builder().value(Department.COMPUTER_ENGINEERING.name()).label("CPE - Computer Engineering").build(),
+                            ChoiceImpl.builder().value(Department.COMPUTER_SCIENCE.name()).label("CS - Computer Science").build(),
+                            ChoiceImpl.builder().value(Department.ENGLISH.name()).label("EN - English").build()
+                    ))
+                    .build();
+
+            assertThat(properties)
+                    .usingRecursiveFieldByFieldElementComparator()
+                    .contains(departmentProperty);
         }
     }
 }
