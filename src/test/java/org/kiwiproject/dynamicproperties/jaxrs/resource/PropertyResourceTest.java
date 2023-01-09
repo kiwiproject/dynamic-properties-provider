@@ -67,7 +67,6 @@ class PropertyResourceTest {
             assertOkResponse(response);
 
             var responseJson = response.readEntity(String.class);
-            System.out.println(responseJson);
             var expectedJson = Fixtures.fixture("courseProperties.json");
 
             JSONAssert.assertEquals(expectedJson, responseJson, false);

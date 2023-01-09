@@ -8,7 +8,7 @@ import java.util.List;
  * Dummy ChoiceSupplier class used as default value for optional attributes of
  * annotations.
  */
-public class NullChoiceSupplier extends ChoiceSupplier {
+public class NullChoiceSupplier implements ChoiceSupplier {
 
     @Override
     public List<Choice> get() {

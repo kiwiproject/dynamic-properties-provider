@@ -17,7 +17,7 @@ public class Course {
     @DynamicField
     private String title;
 
-    public static class DepartmentChoiceSupplier extends ChoiceSupplier {
+    public static class DepartmentChoiceSupplier implements ChoiceSupplier {
         @Override
         public List<Choice> get() {
             return ChoiceSupplier.fromEnum(Department.class, d -> String.format("%s - %s", d.getCode(), d.getDescription()));
