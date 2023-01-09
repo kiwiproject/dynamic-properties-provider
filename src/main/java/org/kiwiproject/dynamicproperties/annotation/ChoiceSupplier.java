@@ -22,7 +22,7 @@ public interface ChoiceSupplier {
      * @return a list of choices
      */
     static <E extends Enum<E>> List<Choice> fromEnum(Class<E> enumClass, Function<E, String> labelFunction) {
-        return fromEnum(enumClass, labelFunction, e -> true);
+        return fromEnum(enumClass, labelFunction, enumValue -> true);
     }
 
     /**
