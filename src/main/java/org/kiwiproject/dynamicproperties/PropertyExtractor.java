@@ -7,10 +7,8 @@ import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.kiwiproject.reflect.KiwiReflection.nonStaticFieldsInHierarchy;
 
-import com.google.common.annotations.VisibleForTesting;
 import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j;
-import org.kiwiproject.dynamicproperties.annotation.Choice;
+
 import org.kiwiproject.dynamicproperties.annotation.ChoiceSupplier;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
@@ -23,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
 @UtilityClass
 public class PropertyExtractor {
 
@@ -68,7 +65,7 @@ public class PropertyExtractor {
         }
 
         if (dynamicFieldAnnotation.choiceSupplier() != NullChoiceSupplier.class) {
-            return getListFromChoiceSupplier(dynamicFieldAnnotation.choiceSupplier());
+            return ChoiceSupplier.getChoices(dynamicFieldAnnotation.choiceSupplier());
         }
 
         if (fieldClass.isEnum()) {
@@ -99,16 +96,6 @@ public class PropertyExtractor {
                 .filter(val -> val instanceof Enum)
                 .map(val -> ((Enum<?>) val).name())
                 .collect(toList());
-    }
-
-    @VisibleForTesting
-    static List<Choice> getListFromChoiceSupplier(Class<? extends ChoiceSupplier> choiceSupplier) {
-        try {
-            return choiceSupplier.getDeclaredConstructor().newInstance().get();
-        } catch (Exception e) {
-            LOG.error("Error getting choices from choicesSupplier: {}", choiceSupplier, e);
-            return emptyList();
-        }
     }
 
     private static DynamicField findDynamicFieldAnnotation(Field field) {

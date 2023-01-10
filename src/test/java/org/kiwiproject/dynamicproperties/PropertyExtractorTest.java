@@ -272,25 +272,4 @@ class PropertyExtractorTest {
                     .contains(departmentProperty);
         }
     }
-
-    @ClearBoxTest
-    void getListFromChoiceSupplierShouldReturnChoices() {
-        List<Choice> choices = PropertyExtractor.getListFromChoiceSupplier(PropertyExtractorTest.TestChoiceSupplier.class);
-
-        assertThat(choices).hasSize(1);
-        assertThat(choices.get(0).getLabel()).isEqualTo("test choice");
-    }
-
-    public static class TestChoiceSupplier implements ChoiceSupplier {
-        @Override
-        public List<Choice> get() {
-            return Collections.singletonList(
-                    Choice.builder()
-                            .value("1")
-                            .label("test choice")
-                            .enabled(true)
-                            .build()
-            );
-        }
-    }
 }
