@@ -15,9 +15,7 @@ import org.kiwiproject.dynamicproperties.data.Course;
 import org.kiwiproject.dynamicproperties.data.Department;
 import org.kiwiproject.dynamicproperties.data.Student;
 import org.kiwiproject.dynamicproperties.data.Student.Education;
-import org.kiwiproject.test.junit.jupiter.ClearBoxTest;
 
-import java.util.Collections;
 import java.util.List;
 
 @DisplayName("PropertyExtractor")
@@ -270,6 +268,25 @@ class PropertyExtractorTest {
             assertThat(properties)
                     .usingRecursiveFieldByFieldElementComparator()
                     .contains(departmentProperty);
+        }
+
+        class TooManyChoices {
+            @DynamicField(choices = {"one", "two"}, choiceSupplier = TooManyChoicesSupplier.class)
+            private String thereCanBeOnlyOne;
+
+            class TooManyChoicesSupplier implements ChoiceSupplier {
+                @Override
+                public List<Choice> get() {
+                    return List.of();
+                }
+            }
+        }
+
+        @Test
+        void shouldThrowExceptionWhenMoreThanOneChoiceAttributeIsProvided() {
+            assertThatThrownBy(() -> PropertyExtractor.extractPropertiesFromClass(TooManyChoices.class))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("Only one of 'choices', 'choicesFromEnum', or 'choicesSupplier' may be specified.");
         }
     }
 }

@@ -87,7 +87,7 @@ public class PropertyExtractor {
             choicesAttributes += 1;
         }
         if (choicesAttributes > 1) {
-            throw new IllegalArgumentException("only one of 'choices', 'choicesFromEnum', or 'choicesSupplier' may be specified");
+            throw new IllegalArgumentException("Only one of 'choices', 'choicesFromEnum', or 'choicesSupplier' may be specified.");
         }
     }
 

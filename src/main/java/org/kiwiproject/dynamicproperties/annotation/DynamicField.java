@@ -44,7 +44,7 @@ public @interface DynamicField {
 
     /**
      * Provide a list of possible values for this field. Useful if field is restricted to a set of values.
-     *
+     * <p>
      * <em>Note:</em> Only one attribute providing choices may be specified per field.
      *
      * @return the choices that should be available for this field, default is empty array
@@ -54,7 +54,7 @@ public @interface DynamicField {
     /**
      * Provide a list of possible values for this field by using the given Enum as the list. Useful if field is
      * restricted to a set of values.
-     *
+     * <p>
      *  <em>Note:</em> Only one attribute providing choices may be specified per field.
      *
      * @return the choices that should be available for this field based on the given Enum.
@@ -64,7 +64,7 @@ public @interface DynamicField {
     /**
      * Provide a list of possible values with labels and enabled-ness for this field by using the given supplier.
      * Useful if field is restricted to a set of values.
-     *
+     * <p>
      * <em>Note:</em> Only one attribute providing choices may be specified per field.
      *
      * @return the {@link Choice}s that should be available for this field.
