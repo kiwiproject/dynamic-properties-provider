@@ -71,7 +71,7 @@ public @interface DynamicField {
      *
      * @return the {@link Choice}s that should be available for this field.
      */
-    Class<? extends Supplier<List<Choice>>> choicesSupplier() default NullChoicesSupplier.class;
+    Class<? extends Supplier<List<Choice>>> choicesSupplier() default NullChoiceSupplier.class;
 
     /**
      * Informs the caller if this field is required.

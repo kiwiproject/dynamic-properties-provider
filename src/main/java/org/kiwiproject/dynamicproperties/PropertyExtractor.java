@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.kiwiproject.dynamicproperties.annotation.Choice;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
-import org.kiwiproject.dynamicproperties.annotation.NullChoicesSupplier;
+import org.kiwiproject.dynamicproperties.annotation.NullChoiceSupplier;
 import org.kiwiproject.dynamicproperties.annotation.NullEnum;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
 
@@ -64,7 +64,7 @@ public class PropertyExtractor {
         if (dynamicFieldAnnotation.choicesFromEnum() != null && dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
             choicesAttributes += 1;
         }
-        if (dynamicFieldAnnotation.choicesSupplier() != null && dynamicFieldAnnotation.choicesSupplier() != NullChoicesSupplier.class) {
+        if (dynamicFieldAnnotation.choicesSupplier() != null && dynamicFieldAnnotation.choicesSupplier() != NullChoiceSupplier.class) {
             choicesAttributes += 1;
         }
         if (choicesAttributes > 1) {
@@ -79,7 +79,7 @@ public class PropertyExtractor {
             return getListFromEnum(dynamicFieldAnnotation.choicesFromEnum());
         }
 
-        if (dynamicFieldAnnotation.choicesSupplier() != null && dynamicFieldAnnotation.choicesSupplier() != NullChoicesSupplier.class) {
+        if (dynamicFieldAnnotation.choicesSupplier() != null && dynamicFieldAnnotation.choicesSupplier() != NullChoiceSupplier.class) {
             return getListFromChoiceSupplier(dynamicFieldAnnotation.choicesSupplier());
         }
 
