@@ -57,29 +57,17 @@ public class PropertyExtractor {
     }
 
     private static List<?> getPossibleValuesForField(Class<?> fieldClass, DynamicField dynamicFieldAnnotation) {
-        int choicesAttributes = 0;
-        if (isNotEmpty(dynamicFieldAnnotation.choices())) {
-            choicesAttributes += 1;
-        }
-        if (dynamicFieldAnnotation.choicesFromEnum() != null && dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
-            choicesAttributes += 1;
-        }
-        if (dynamicFieldAnnotation.choicesSupplier() != null && dynamicFieldAnnotation.choicesSupplier() != NullChoiceSupplier.class) {
-            choicesAttributes += 1;
-        }
-        if (choicesAttributes > 1) {
-            throw new IllegalArgumentException("only one of 'choices', 'choicesFromEnum', or 'choicesSupplier' may be specified");
-        }
+        checkOnlyOneChoiceSupplied(dynamicFieldAnnotation);
 
         if (isNotEmpty(dynamicFieldAnnotation.choices())) {
-            return Arrays.asList(dynamicFieldAnnotation.choices());
+            return List.of(dynamicFieldAnnotation.choices());
         }
 
-        if (dynamicFieldAnnotation.choicesFromEnum() != null && dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
+        if (dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
             return getListFromEnum(dynamicFieldAnnotation.choicesFromEnum());
         }
 
-        if (dynamicFieldAnnotation.choicesSupplier() != null && dynamicFieldAnnotation.choicesSupplier() != NullChoiceSupplier.class) {
+        if (dynamicFieldAnnotation.choicesSupplier() != NullChoiceSupplier.class) {
             return getListFromChoiceSupplier(dynamicFieldAnnotation.choicesSupplier());
         }
 
@@ -88,6 +76,22 @@ public class PropertyExtractor {
         }
 
         return emptyList();
+    }
+
+    private static void checkOnlyOneChoiceSupplied(DynamicField dynamicFieldAnnotation) {
+        int choicesAttributes = 0;
+        if (isNotEmpty(dynamicFieldAnnotation.choices())) {
+            choicesAttributes += 1;
+        }
+        if (dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
+            choicesAttributes += 1;
+        }
+        if (dynamicFieldAnnotation.choicesSupplier() != NullChoiceSupplier.class) {
+            choicesAttributes += 1;
+        }
+        if (choicesAttributes > 1) {
+            throw new IllegalArgumentException("only one of 'choices', 'choicesFromEnum', or 'choicesSupplier' may be specified");
+        }
     }
 
     private static List<String> getListFromEnum(Class<?> enumClass) {
