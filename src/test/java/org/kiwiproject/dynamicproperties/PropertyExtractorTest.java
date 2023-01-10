@@ -14,9 +14,12 @@ import org.kiwiproject.dynamicproperties.data.Course;
 import org.kiwiproject.dynamicproperties.data.Department;
 import org.kiwiproject.dynamicproperties.data.Student;
 import org.kiwiproject.dynamicproperties.data.Student.Education;
+import org.kiwiproject.test.junit.jupiter.ClearBoxTest;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 @DisplayName("PropertyExtractor")
 class PropertyExtractorTest {
@@ -268,6 +271,27 @@ class PropertyExtractorTest {
             assertThat(properties)
                     .usingRecursiveFieldByFieldElementComparator()
                     .contains(departmentProperty);
+        }
+    }
+
+    @ClearBoxTest
+    void getListFromChoiceSupplierShouldReturnChoices() {
+        List<Choice> choices = PropertyExtractor.getListFromChoiceSupplier(PropertyExtractorTest.TestChoicesSupplier.class);
+
+        assertThat(choices).hasSize(1);
+        assertThat(choices.get(0).getLabel()).isEqualTo("test choice");
+    }
+
+    public static class TestChoicesSupplier implements Supplier<List<Choice>> {
+        @Override
+        public List<Choice> get() {
+            return Collections.singletonList(
+                    Choice.builder()
+                            .value("1")
+                            .label("test choice")
+                            .enabled(true)
+                            .build()
+            );
         }
     }
 }

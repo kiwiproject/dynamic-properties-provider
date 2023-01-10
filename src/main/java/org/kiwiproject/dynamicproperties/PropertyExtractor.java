@@ -7,6 +7,7 @@ import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.kiwiproject.reflect.KiwiReflection.nonStaticFieldsInHierarchy;
 
+import com.google.common.annotations.VisibleForTesting;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.kiwiproject.dynamicproperties.annotation.Choice;
@@ -96,11 +97,12 @@ public class PropertyExtractor {
                 .collect(toList());
     }
 
-    private static List<Choice> getListFromChoiceSupplier(Class<? extends Supplier<List<Choice>>> choicesSupplier) {
+    @VisibleForTesting
+    static List<Choice> getListFromChoiceSupplier(Class<? extends Supplier<List<Choice>>> choicesSupplier) {
         try {
             return choicesSupplier.getDeclaredConstructor().newInstance().get();
         } catch (Exception e) {
-            LOG.error("exception getting choices from choicesSupplier: {}", choicesSupplier, e);
+            LOG.error("Error getting choices from choicesSupplier: {}", choicesSupplier, e);
             return emptyList();
         }
     }

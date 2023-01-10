@@ -1,5 +1,7 @@
 package org.kiwiproject.dynamicproperties.data;
 
+import static org.kiwiproject.base.KiwiStrings.f;
+
 import org.kiwiproject.dynamicproperties.annotation.Choice;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 
@@ -22,7 +24,7 @@ public class Course {
         public List<Choice> get() {
             return Choice.choicesForEnum(
                     Department.class,
-                    dept -> String.format("%s - %s", dept.getCode(), dept.getDescription())
+                    dept -> f("{} - {}", dept.getCode(), dept.getDescription())
             );
         }
     }
