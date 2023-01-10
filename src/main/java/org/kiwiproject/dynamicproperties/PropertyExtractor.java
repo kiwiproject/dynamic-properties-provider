@@ -10,18 +10,17 @@ import static org.kiwiproject.reflect.KiwiReflection.nonStaticFieldsInHierarchy;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.kiwiproject.dynamicproperties.annotation.Choice;
-import org.kiwiproject.dynamicproperties.annotation.ChoiceSupplier;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
-import org.kiwiproject.dynamicproperties.annotation.NullChoiceSupplier;
+import org.kiwiproject.dynamicproperties.annotation.NullChoicesSupplier;
 import org.kiwiproject.dynamicproperties.annotation.NullEnum;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @Slf4j
 @UtilityClass
@@ -57,16 +56,30 @@ public class PropertyExtractor {
     }
 
     private static List<?> getPossibleValuesForField(Class<?> fieldClass, DynamicField dynamicFieldAnnotation) {
+        int choicesAttributes = 0;
+        if (isNotEmpty(dynamicFieldAnnotation.choices())) {
+            choicesAttributes += 1;
+        }
+        if (dynamicFieldAnnotation.choicesFromEnum() != null && dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
+            choicesAttributes += 1;
+        }
+        if (dynamicFieldAnnotation.choicesSupplier() != null && dynamicFieldAnnotation.choicesSupplier() != NullChoicesSupplier.class) {
+            choicesAttributes += 1;
+        }
+        if (choicesAttributes > 1) {
+            throw new IllegalArgumentException("only one of 'choices', 'choicesFromEnum', or 'choicesSupplier' may be specified");
+        }
+
         if (isNotEmpty(dynamicFieldAnnotation.choices())) {
             return Arrays.asList(dynamicFieldAnnotation.choices());
         }
 
-        if (dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
+        if (dynamicFieldAnnotation.choicesFromEnum() != null && dynamicFieldAnnotation.choicesFromEnum() != NullEnum.class) {
             return getListFromEnum(dynamicFieldAnnotation.choicesFromEnum());
         }
 
-        if (dynamicFieldAnnotation.choiceSupplier() != NullChoiceSupplier.class) {
-            return getListFromChoiceSupplier(dynamicFieldAnnotation.choiceSupplier());
+        if (dynamicFieldAnnotation.choicesSupplier() != null && dynamicFieldAnnotation.choicesSupplier() != NullChoicesSupplier.class) {
+            return getListFromChoiceSupplier(dynamicFieldAnnotation.choicesSupplier());
         }
 
         if (fieldClass.isEnum()) {
@@ -83,11 +96,11 @@ public class PropertyExtractor {
                 .collect(toList());
     }
 
-    private static List<Choice> getListFromChoiceSupplier(Class<? extends ChoiceSupplier> choiceSupplier) {
+    private static List<Choice> getListFromChoiceSupplier(Class<? extends Supplier<List<Choice>>> choicesSupplier) {
         try {
-            return choiceSupplier.getDeclaredConstructor().newInstance().get();
-        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
-            LOG.error("exception getting choices from ChoiceSupplier", e);
+            return choicesSupplier.getDeclaredConstructor().newInstance().get();
+        } catch (Exception e) {
+            LOG.error("exception getting choices from choicesSupplier: {}", choicesSupplier, e);
             return emptyList();
         }
     }

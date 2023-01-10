@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.kiwiproject.dynamicproperties.annotation.ChoiceImpl;
+import org.kiwiproject.dynamicproperties.annotation.Choice;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
@@ -250,9 +250,18 @@ class PropertyExtractorTest {
                     .units(null)
                     .defaultUnit(null)
                     .values(Arrays.asList(
-                            ChoiceImpl.builder().value(Department.COMPUTER_ENGINEERING.name()).label("CPE - Computer Engineering").build(),
-                            ChoiceImpl.builder().value(Department.COMPUTER_SCIENCE.name()).label("CS - Computer Science").build(),
-                            ChoiceImpl.builder().value(Department.ENGLISH.name()).label("EN - English").build()
+                            Choice.builder()
+                                    .value(Department.COMPUTER_ENGINEERING.name())
+                                    .label("CPE - Computer Engineering")
+                                    .build(),
+                            Choice.builder()
+                                    .value(Department.COMPUTER_SCIENCE.name())
+                                    .label("CS - Computer Science")
+                                    .build(),
+                            Choice.builder()
+                                    .value(Department.ENGLISH.name())
+                                    .label("EN - English")
+                                    .build()
                     ))
                     .build();
 

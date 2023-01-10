@@ -1,14 +1,14 @@
 package org.kiwiproject.dynamicproperties.data;
 
 import org.kiwiproject.dynamicproperties.annotation.Choice;
-import org.kiwiproject.dynamicproperties.annotation.ChoiceSupplier;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class Course {
 
-    @DynamicField(required = true, choiceSupplier = DepartmentChoiceSupplier.class)
+    @DynamicField(required = true, choicesSupplier = DepartmentChoicesSupplier.class)
     private Department department;
 
     @DynamicField(required = true)
@@ -17,10 +17,13 @@ public class Course {
     @DynamicField
     private String title;
 
-    public static class DepartmentChoiceSupplier implements ChoiceSupplier {
+    public static class DepartmentChoicesSupplier implements Supplier<List<Choice>> {
         @Override
         public List<Choice> get() {
-            return ChoiceSupplier.fromEnum(Department.class, d -> String.format("%s - %s", d.getCode(), d.getDescription()));
+            return Choice.choicesForEnum(
+                    Department.class,
+                    dept -> String.format("%s - %s", dept.getCode(), dept.getDescription())
+            );
         }
     }
 }

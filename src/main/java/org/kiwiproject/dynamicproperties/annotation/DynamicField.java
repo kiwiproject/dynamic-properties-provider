@@ -5,6 +5,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Annotation that indicates a class field is discoverable as dynamic.
@@ -45,6 +47,8 @@ public @interface DynamicField {
     /**
      * Provide a list of possible values for this field. Useful if field is restricted to a set of values.
      *
+     * <b>Note:</b> Only one attribute providing choices may be specified per field.
+     *
      * @return the choices that should be available for this field, default is empty array
      */
     String[] choices() default {};
@@ -53,17 +57,21 @@ public @interface DynamicField {
      * Provide a list of possible values for this field by using the given Enum as the list. Useful if field is
      * restricted to a set of values.
      *
+     *  <b>Note:</b> Only one attribute providing choices may be specified per field.
+     *
      * @return the choices that should be available for this field based on the given Enum.
      */
     Class<? extends Enum> choicesFromEnum() default NullEnum.class;
 
     /**
-     * Provide a list of possible values with labels and enabled-ness for this field by using the given ChoiceSupplier.
+     * Provide a list of possible values with labels and enabled-ness for this field by using the given supplier.
      * Useful if field is restricted to a set of values.
+     *
+     * <b>Note:</b> Only one attribute providing choices may be specified per field.
      *
      * @return the {@link Choice}s that should be available for this field.
      */
-    Class<? extends ChoiceSupplier> choiceSupplier() default NullChoiceSupplier.class;
+    Class<? extends Supplier<List<Choice>>> choicesSupplier() default NullChoicesSupplier.class;
 
     /**
      * Informs the caller if this field is required.
