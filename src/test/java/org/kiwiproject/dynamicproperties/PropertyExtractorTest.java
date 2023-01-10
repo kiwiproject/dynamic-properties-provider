@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.kiwiproject.dynamicproperties.annotation.Choice;
+import org.kiwiproject.dynamicproperties.annotation.ChoiceSupplier;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
@@ -18,7 +19,6 @@ import org.kiwiproject.test.junit.jupiter.ClearBoxTest;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Supplier;
 
 @DisplayName("PropertyExtractor")
 class PropertyExtractorTest {
@@ -275,13 +275,13 @@ class PropertyExtractorTest {
 
     @ClearBoxTest
     void getListFromChoiceSupplierShouldReturnChoices() {
-        List<Choice> choices = PropertyExtractor.getListFromChoiceSupplier(PropertyExtractorTest.TestChoicesSupplier.class);
+        List<Choice> choices = PropertyExtractor.getListFromChoiceSupplier(PropertyExtractorTest.TestChoiceSupplier.class);
 
         assertThat(choices).hasSize(1);
         assertThat(choices.get(0).getLabel()).isEqualTo("test choice");
     }
 
-    public static class TestChoicesSupplier implements Supplier<List<Choice>> {
+    public static class TestChoiceSupplier implements ChoiceSupplier {
         @Override
         public List<Choice> get() {
             return Collections.singletonList(
