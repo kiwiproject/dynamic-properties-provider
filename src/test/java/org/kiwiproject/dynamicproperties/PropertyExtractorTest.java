@@ -16,7 +16,6 @@ import org.kiwiproject.dynamicproperties.data.Student;
 import org.kiwiproject.dynamicproperties.data.Student.Education;
 import org.kiwiproject.test.junit.jupiter.ClearBoxTest;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
@@ -252,7 +251,7 @@ class PropertyExtractorTest {
                     .sensitive(false)
                     .units(null)
                     .defaultUnit(null)
-                    .values(Arrays.asList(
+                    .values(List.of(
                             Choice.builder()
                                     .value(Department.COMPUTER_ENGINEERING.name())
                                     .label("CPE - Computer Engineering")
