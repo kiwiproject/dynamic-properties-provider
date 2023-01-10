@@ -61,7 +61,7 @@ public @interface DynamicField {
      *
      * @return the choices that should be available for this field based on the given Enum.
      */
-    Class<? extends Enum<?> choicesFromEnum() default NullEnum.class;
+    Class<? extends Enum<?>> choicesFromEnum() default NullEnum.class;
 
     /**
      * Provide a list of possible values with labels and enabled-ness for this field by using the given supplier.
