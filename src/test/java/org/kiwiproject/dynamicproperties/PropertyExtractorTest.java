@@ -6,9 +6,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.kiwiproject.dynamicproperties.annotation.Choice;
+import org.kiwiproject.dynamicproperties.annotation.ChoiceSupplier;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
 import org.kiwiproject.dynamicproperties.annotation.Unit;
+import org.kiwiproject.dynamicproperties.data.Course;
+import org.kiwiproject.dynamicproperties.data.Department;
 import org.kiwiproject.dynamicproperties.data.Student;
 import org.kiwiproject.dynamicproperties.data.Student.Education;
 
@@ -228,6 +232,61 @@ class PropertyExtractorTest {
             assertThatThrownBy(() -> PropertyExtractor.extractPropertiesFromClass(InvalidEnumUnitDefault.class))
                     .isInstanceOf(IllegalStateException.class)
                     .hasMessage("EnumUnit default value is not a valid value.");
+        }
+
+        @Test
+        void shouldGetValuesFromChoiceSupplier() {
+            List<Property> properties = PropertyExtractor.extractPropertiesFromClass(Course.class);
+
+            Property departmentProperty = Property.builder()
+                    .name("department")
+                    .label("")
+                    .placeholder("")
+                    .type("Department")
+                    .required(true)
+                    .visible(true)
+                    .editable(true)
+                    .sensitive(false)
+                    .units(null)
+                    .defaultUnit(null)
+                    .values(List.of(
+                            Choice.builder()
+                                    .value(Department.COMPUTER_ENGINEERING.name())
+                                    .label("CPE - Computer Engineering")
+                                    .build(),
+                            Choice.builder()
+                                    .value(Department.COMPUTER_SCIENCE.name())
+                                    .label("CS - Computer Science")
+                                    .build(),
+                            Choice.builder()
+                                    .value(Department.ENGLISH.name())
+                                    .label("EN - English")
+                                    .build()
+                    ))
+                    .build();
+
+            assertThat(properties)
+                    .usingRecursiveFieldByFieldElementComparator()
+                    .contains(departmentProperty);
+        }
+
+        class TooManyChoices {
+            @DynamicField(choices = {"one", "two"}, choiceSupplier = TooManyChoicesSupplier.class)
+            private String thereCanBeOnlyOne;
+
+            class TooManyChoicesSupplier implements ChoiceSupplier {
+                @Override
+                public List<Choice> get() {
+                    return List.of();
+                }
+            }
+        }
+
+        @Test
+        void shouldThrowExceptionWhenMoreThanOneChoiceAttributeIsProvided() {
+            assertThatThrownBy(() -> PropertyExtractor.extractPropertiesFromClass(TooManyChoices.class))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("Only one of 'choices', 'choicesFromEnum', or 'choicesSupplier' may be specified.");
         }
     }
 }

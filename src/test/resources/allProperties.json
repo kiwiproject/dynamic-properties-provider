@@ -189,5 +189,59 @@
       "defaultUnit": null,
       "values": []
     }
+  ],
+  "course": [
+    {
+      "name": "department",
+      "label": "",
+      "placeholder": "",
+      "type": "Department",
+      "required": true,
+      "visible": true,
+      "editable": true,
+      "units": null,
+      "defaultUnit": null,
+      "values": [
+        {
+          "value": "COMPUTER_ENGINEERING",
+          "label": "CPE - Computer Engineering",
+          "enabled": true
+        },
+        {
+          "value": "COMPUTER_SCIENCE",
+          "label": "CS - Computer Science",
+          "enabled": true
+        },
+        {
+          "value": "ENGLISH",
+          "label": "EN - English",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "name": "number",
+      "label": "",
+      "placeholder": "",
+      "type": "String",
+      "required": true,
+      "visible": true,
+      "editable": true,
+      "units": null,
+      "defaultUnit": null,
+      "values": []
+    },
+    {
+      "name": "title",
+      "label": "",
+      "placeholder": "",
+      "type": "String",
+      "required": false,
+      "visible": true,
+      "editable": true,
+      "units": null,
+      "defaultUnit": null,
+      "values": []
+    }
   ]
 }
