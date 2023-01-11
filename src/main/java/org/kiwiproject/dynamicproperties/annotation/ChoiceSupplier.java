@@ -16,7 +16,7 @@ public interface ChoiceSupplier extends Supplier<List<Choice>> {
      *
      * @param choiceSupplierClass the type of ChoiceSupplier
      * @return a list of choices
-     * @throws
+     * @throws IllegalArgumentException if the given type is not a valid ChoiceSupplier class
      */
     public static List<Choice> getChoices(Class<? extends ChoiceSupplier> choiceSupplierClass) {
         checkArgumentNotNull(choiceSupplierClass);
