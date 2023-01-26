@@ -168,24 +168,24 @@ jobs:
 
     - name: Try to end tracing (again)
       run: |
-        echo "CODEQL_TRACER_LOG=''" >> $GITHUB_ENV
-        echo "CODEQL_TRACER_LANGUAGES=''" >> $GITHUB_ENV
-        echo "SEMMLE_PRELOAD_libtrace=''" >> $GITHUB_ENV
-        echo "SEMMLE_PRELOAD_libtrace32=''" >> $GITHUB_ENV
-        echo "SEMMLE_PRELOAD_libtrace64=''" >> $GITHUB_ENV
-        echo "CODEQL_PLATFORM='linux64'" >> $GITHUB_ENV
-        echo "CODEQL_ISATTY='stderr'" >> $GITHUB_ENV
-        echo "CODEQL_DIST='/workspace/codeql'" >> $GITHUB_ENV
-        echo "CODEQL_SCRATCH_DIR=''" >> $GITHUB_ENV
-        echo "CODEQL_PLATFORM_DLL_EXTENSION=''" >> $GITHUB_ENV
-        echo "CODEQL_JAVA_HOME=''" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_ROOT=''" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_WIP_DATABASE=''" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_LOG_DIR=''" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_SCRATCH_DIR=''" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_TRAP_DIR=''" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_SOURCE_ARCHIVE_DIR=''" >> $GITHUB_ENV
-        echo "LD_PRELOAD=''" >> $GITHUB_ENV
+        echo "CODEQL_TRACER_LOG=" >> $GITHUB_ENV
+        echo "CODEQL_TRACER_LANGUAGES=" >> $GITHUB_ENV
+        echo "SEMMLE_PRELOAD_libtrace=" >> $GITHUB_ENV
+        echo "SEMMLE_PRELOAD_libtrace32=" >> $GITHUB_ENV
+        echo "SEMMLE_PRELOAD_libtrace64=" >> $GITHUB_ENV
+        echo "CODEQL_PLATFORM=linux64" >> $GITHUB_ENV
+        echo "CODEQL_ISATTY=stderr" >> $GITHUB_ENV
+        echo "CODEQL_DIST=/workspace/codeql" >> $GITHUB_ENV
+        echo "CODEQL_SCRATCH_DIR=" >> $GITHUB_ENV
+        echo "CODEQL_PLATFORM_DLL_EXTENSION=" >> $GITHUB_ENV
+        echo "CODEQL_JAVA_HOME=" >> $GITHUB_ENV
+        echo "CODEQL_EXTRACTOR_JAVA_ROOT=" >> $GITHUB_ENV
+        echo "CODEQL_EXTRACTOR_JAVA_WIP_DATABASE=" >> $GITHUB_ENV
+        echo "CODEQL_EXTRACTOR_JAVA_LOG_DIR=" >> $GITHUB_ENV
+        echo "CODEQL_EXTRACTOR_JAVA_SCRATCH_DIR=" >> $GITHUB_ENV
+        echo "CODEQL_EXTRACTOR_JAVA_TRAP_DIR=" >> $GITHUB_ENV
+        echo "CODEQL_EXTRACTOR_JAVA_SOURCE_ARCHIVE_DIR=" >> $GITHUB_ENV
+        echo "LD_PRELOAD=" >> $GITHUB_ENV
 
     - name: List environment (after trying again to End tracing)
       run: |
