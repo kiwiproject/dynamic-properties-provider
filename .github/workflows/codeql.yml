@@ -154,6 +154,9 @@ jobs:
         echo "try to find any files with tracking in their name:"
         find /home/runner -type f -name "*tracing*"
 
+    - name: End tracing
+      run : source /home/runner/work/_temp/codeql_databases/temp/tracingEnvironment/end-tracing.sh
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
