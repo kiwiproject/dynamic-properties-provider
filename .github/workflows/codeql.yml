@@ -89,6 +89,7 @@ jobs:
         ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all
         echo "list CODEQL_EXTRACTOR_JAVA_WIP_DATABASE dir:"
         ls -l $CODEQL_EXTRACTOR_JAVA_WIP_DATABASE
+        echo "list CODEQL_EXTRACTOR_JAVA_WIP_DATABASE/temp dir:"
         ls -l $CODEQL_EXTRACTOR_JAVA_WIP_DATABASE/temp
 
     # Use cache of Maven repository
