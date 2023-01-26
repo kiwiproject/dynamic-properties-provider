@@ -131,12 +131,27 @@ jobs:
     - name: Build
       run: ./build-for-codeql.sh
 
+    - name: List environment (after custom build)
+      run: |
+        echo "env vars with CODEQL:"
+        env | grep CODEQL
+        echo "env vars with SEMMLE:"
+        env | grep SEMMLE
+        echo "env var LD_PRELOAD:"
+        env | grep LD_PRELOAD
+        echo "try to find tracingEnvironment..."
+        find /home/runner -name tracingEnvironment
+        echo "try to find any files with tracking in their name:"
+        find /home/runner -type f -name "*tracing*"
+        echo "find any file containing CODEQL_EXTRACTOR_JAVA_LOG_DIR:"
+        find /home/runner -type f -exec grep -Hn CODEQL_EXTRACTOR_JAVA_LOG_DIR {} \;
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
 
-    - name: List environment (after custom build)
+    - name: List environment (after CodeQL Analysis)
       run: |
         echo "env vars with CODEQL:"
         env | grep CODEQL
