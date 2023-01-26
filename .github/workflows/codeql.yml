@@ -51,6 +51,7 @@ jobs:
         echo "working dir: `pwd`"
         echo "finding java-code-scanning.qls"
         find /home/runner/work -name java-code-scanning.qls
+        find /opt/hostedtoolcache/CodeQL/ -name java-code-scanning.qls
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -69,6 +70,7 @@ jobs:
         echo "working dir: `pwd`"
         echo "Try to find java-code-scanning.qls (again)"
         find /home/runner/work -name java-code-scanning.qls
+        find /opt/hostedtoolcache/CodeQL/ -name java-code-scanning.qls
         echo "user-config.yaml:"
         cat /home/runner/work/_temp/user-config.yaml
 
