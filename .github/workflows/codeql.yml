@@ -73,6 +73,12 @@ jobs:
         env | grep SEMMLE
         echo "env var LD_PRELOAD:"
         env | grep LD_PRELOAD
+        echo "what's in /home/runner/work/_temp/codeql_databases?"
+        ls -l /home/runner/work/_temp/codeql_databases
+        echo "try to find tracingEnvironment..."
+        find /home/runner -name tracingEnvironment
+        echo "try to find any files with tracing in their name:"
+        find /home/runner -type f -name "*tracing*"
 
     - name: More Debugging stuff
       run: |
@@ -89,6 +95,10 @@ jobs:
         ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all
         echo "list CODEQL_EXTRACTOR_JAVA_WIP_DATABASE dir:"
         ls -lR $CODEQL_EXTRACTOR_JAVA_WIP_DATABASE
+        echo "try to find tracingEnvironment..."
+        find /home/runner -name tracingEnvironment
+        echo "try to find any files with tracking in their name:"
+        find /home/runner -type f -name "*tracing*"
 
     # Use cache of Maven repository
     - name: Cache Maven packages
@@ -143,8 +153,6 @@ jobs:
         find /home/runner -name tracingEnvironment
         echo "try to find any files with tracking in their name:"
         find /home/runner -type f -name "*tracing*"
-        echo "find any file containing CODEQL_EXTRACTOR_JAVA_LOG_DIR:"
-        find /home/runner -type f -exec grep -Hn CODEQL_EXTRACTOR_JAVA_LOG_DIR {} \;
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
