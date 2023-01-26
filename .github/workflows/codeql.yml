@@ -46,6 +46,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Debugging stuff
+      run: |
+        echo "working dir: ${pwd}"
+        echo "finding java-code-scanning.qls"
+        find . -name java-code-scanning.qls
+
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
