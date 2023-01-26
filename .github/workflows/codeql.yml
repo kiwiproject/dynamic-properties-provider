@@ -69,6 +69,8 @@ jobs:
         echo "working dir: `pwd`"
         echo "Try to find java-code-scanning.qls (again)"
         find /home/runner/work -name java-code-scanning.qls
+        echo "user-config.yaml:"
+        cat /home/runner/work/_temp/user-config.yaml
 
     # Use cache of Maven repository
     - name: Cache Maven packages
