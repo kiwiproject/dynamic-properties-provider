@@ -64,6 +64,12 @@ jobs:
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
+    - name: More Debugging stuff
+      run: |
+        echo "working dir: `pwd`"
+        echo "Try to find java-code-scanning.qls (again)"
+        find . -name java-code-scanning.qls
+
     # Use cache of Maven repository
     - name: Cache Maven packages
       uses: actions/cache@v3
