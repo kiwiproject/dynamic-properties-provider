@@ -76,8 +76,8 @@ jobs:
         echo "-- java-code-scanning.qls:"
         echo "list /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks"
         ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks
-        echo "list /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/java-all"
-        ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/java-all
+        echo "list /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all"
+        ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all
 
     # Use cache of Maven repository
     - name: Cache Maven packages
