@@ -48,7 +48,7 @@ jobs:
 
     - name: Debugging stuff
       run: |
-        echo "working dir: ${pwd}"
+        echo "working dir: `pwd`"
         echo "finding java-code-scanning.qls"
         find . -name java-code-scanning.qls
 
