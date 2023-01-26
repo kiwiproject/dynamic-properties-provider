@@ -123,3 +123,18 @@ jobs:
 
 # Misc:
 #  --search-path=/home/gitpod/.codeql/packages/codeql/java-queries:/home/gitpod/.codeql/packages/codeql/suite-helpers/
+
+
+# commands:
+
+# -- create database
+# codeql database create /workspace/db/java --language=java
+
+# -- analyze #1
+# codeql database analyze  --format=csv --output=codeql-results.csv /workspace/db/java codeql/java-queries
+
+# -- analyze #2
+# codeql database analyze  --format=csv --output=codeql-results.csv /workspace/db/java /home/gitpod/.codeql/packages/codeql/java-queries/0.5.1/codeql-suites/java-lgtm-full.qls
+
+# --print baseline info
+# codeql database print-baseline /workspace/db/java
