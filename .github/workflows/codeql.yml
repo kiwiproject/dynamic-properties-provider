@@ -12,6 +12,8 @@ on:
       - '**/*.txt'
   schedule:
     - cron: '36 23 * * 3'
+  workflow_dispatch:
+    # no inputs needed here
 
 jobs:
   analyze:
