@@ -108,6 +108,10 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
+    # Let's try to delombok **before** the build...I'm sure this won't work either...
+    - name: Delombok
+      uses: advanced-security/delombok@main
+
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
@@ -196,8 +200,8 @@ jobs:
     #     echo "env var LD_PRELOAD:"
     #     env | grep LD_PRELOAD
 
-    - name: Delombok
-      uses: advanced-security/delombok@main
+    # - name: Delombok
+    #   uses: advanced-security/delombok@main
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
