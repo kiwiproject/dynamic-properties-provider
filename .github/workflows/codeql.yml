@@ -65,40 +65,40 @@ jobs:
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-    - name: List environment (after codeql-action-init and before custom build)
-      run: |
-        echo "env vars with CODEQL:"
-        env | grep CODEQL
-        echo "env vars with SEMMLE:"
-        env | grep SEMMLE
-        echo "env var LD_PRELOAD:"
-        env | grep LD_PRELOAD
-        echo "what's in /home/runner/work/_temp/codeql_databases?"
-        ls -l /home/runner/work/_temp/codeql_databases
-        echo "try to find tracingEnvironment..."
-        find /home/runner -name tracingEnvironment
-        echo "try to find any files with tracing in their name:"
-        find /home/runner -type f -name "*tracing*"
+    # - name: List environment (after codeql-action-init and before custom build)
+    #   run: |
+    #     echo "env vars with CODEQL:"
+    #     env | grep CODEQL
+    #     echo "env vars with SEMMLE:"
+    #     env | grep SEMMLE
+    #     echo "env var LD_PRELOAD:"
+    #     env | grep LD_PRELOAD
+    #     echo "what's in /home/runner/work/_temp/codeql_databases?"
+    #     ls -l /home/runner/work/_temp/codeql_databases
+    #     echo "try to find tracingEnvironment..."
+    #     find /home/runner -name tracingEnvironment
+    #     echo "try to find any files with tracing in their name:"
+    #     find /home/runner -type f -name "*tracing*"
 
-    - name: More Debugging stuff
-      run: |
-        echo "working dir: `pwd`"
-        echo "Try to find java-code-scanning.qls (again)"
-        find /home/runner/work -name java-code-scanning.qls
-        find /opt/hostedtoolcache/CodeQL/ -name java-code-scanning.qls
-        echo "java-code-scanning.qls:"
-        cat /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-queries/0.5.0/codeql-suites/java-code-scanning.qls
-        echo "-- java-code-scanning.qls:"
-        echo "list /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks"
-        ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks
-        echo "list /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all"
-        ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all
-        echo "list CODEQL_EXTRACTOR_JAVA_WIP_DATABASE dir:"
-        ls -lR $CODEQL_EXTRACTOR_JAVA_WIP_DATABASE
-        echo "try to find tracingEnvironment..."
-        find /home/runner -name tracingEnvironment
-        echo "try to find any files with tracking in their name:"
-        find /home/runner -type f -name "*tracing*"
+    # - name: More Debugging stuff
+    #   run: |
+    #     echo "working dir: `pwd`"
+    #     echo "Try to find java-code-scanning.qls (again)"
+    #     find /home/runner/work -name java-code-scanning.qls
+    #     find /opt/hostedtoolcache/CodeQL/ -name java-code-scanning.qls
+    #     echo "java-code-scanning.qls:"
+    #     cat /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-queries/0.5.0/codeql-suites/java-code-scanning.qls
+    #     echo "-- java-code-scanning.qls:"
+    #     echo "list /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks"
+    #     ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks
+    #     echo "list /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all"
+    #     ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all
+    #     echo "list CODEQL_EXTRACTOR_JAVA_WIP_DATABASE dir:"
+    #     ls -lR $CODEQL_EXTRACTOR_JAVA_WIP_DATABASE
+    #     echo "try to find tracingEnvironment..."
+    #     find /home/runner -name tracingEnvironment
+    #     echo "try to find any files with tracking in their name:"
+    #     find /home/runner -type f -name "*tracing*"
 
     # Use cache of Maven repository
     - name: Cache Maven packages
@@ -110,8 +110,8 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    # - name: Autobuild
-    #   uses: github/codeql-action/autobuild@v2
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
@@ -138,77 +138,80 @@ jobs:
     #     echo "First lines of Department.java which should be the delomboked version:"
     #     cat src/test/java/org/kiwiproject/dynamicproperties/data/Department.java
 
-    - name: Build
-      run: ./build-for-codeql.sh
+    # - name: Build
+    #   run: ./build-for-codeql.sh
 
-    - name: List environment (after custom build)
-      run: |
-        echo "env vars with CODEQL:"
-        env | grep CODEQL
-        echo "env vars with SEMMLE:"
-        env | grep SEMMLE
-        echo "env var LD_PRELOAD:"
-        env | grep LD_PRELOAD
-        echo "try to find tracingEnvironment..."
-        find /home/runner -name tracingEnvironment
-        echo "try to find any files with tracking in their name:"
-        find /home/runner -type f -name "*tracing*"
+    # - name: List environment (after custom build)
+    #   run: |
+    #     echo "env vars with CODEQL:"
+    #     env | grep CODEQL
+    #     echo "env vars with SEMMLE:"
+    #     env | grep SEMMLE
+    #     echo "env var LD_PRELOAD:"
+    #     env | grep LD_PRELOAD
+    #     echo "try to find tracingEnvironment..."
+    #     find /home/runner -name tracingEnvironment
+    #     echo "try to find any files with tracking in their name:"
+    #     find /home/runner -type f -name "*tracing*"
 
-    - name: End tracing
-      run : source /home/runner/work/_temp/codeql_databases/temp/tracingEnvironment/end-tracing.sh
+    # - name: End tracing
+    #   run : source /home/runner/work/_temp/codeql_databases/temp/tracingEnvironment/end-tracing.sh
 
-    - name: List environment (after End tracing)
-      run: |
-        echo "env vars with CODEQL:"
-        env | grep CODEQL
-        echo "env vars with SEMMLE:"
-        env | grep SEMMLE
-        echo "env var LD_PRELOAD:"
-        env | grep LD_PRELOAD
+    # - name: List environment (after End tracing)
+    #   run: |
+    #     echo "env vars with CODEQL:"
+    #     env | grep CODEQL
+    #     echo "env vars with SEMMLE:"
+    #     env | grep SEMMLE
+    #     echo "env var LD_PRELOAD:"
+    #     env | grep LD_PRELOAD
 
-    - name: Try to end tracing (again)
-      run: |
-        echo "CODEQL_TRACER_LOG=" >> $GITHUB_ENV
-        echo "CODEQL_TRACER_LANGUAGES=" >> $GITHUB_ENV
-        echo "SEMMLE_PRELOAD_libtrace=" >> $GITHUB_ENV
-        echo "SEMMLE_PRELOAD_libtrace32=" >> $GITHUB_ENV
-        echo "SEMMLE_PRELOAD_libtrace64=" >> $GITHUB_ENV
-        echo "CODEQL_PLATFORM=linux64" >> $GITHUB_ENV
-        echo "CODEQL_ISATTY=stderr" >> $GITHUB_ENV
-        echo "CODEQL_DIST=/workspace/codeql" >> $GITHUB_ENV
-        echo "CODEQL_SCRATCH_DIR=" >> $GITHUB_ENV
-        echo "CODEQL_PLATFORM_DLL_EXTENSION=" >> $GITHUB_ENV
-        echo "CODEQL_JAVA_HOME=" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_ROOT=" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_WIP_DATABASE=" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_LOG_DIR=" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_SCRATCH_DIR=" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_TRAP_DIR=" >> $GITHUB_ENV
-        echo "CODEQL_EXTRACTOR_JAVA_SOURCE_ARCHIVE_DIR=" >> $GITHUB_ENV
-        echo "LD_PRELOAD=" >> $GITHUB_ENV
+    # - name: Try to end tracing (again)
+    #   run: |
+    #     echo "CODEQL_TRACER_LOG=" >> $GITHUB_ENV
+    #     echo "CODEQL_TRACER_LANGUAGES=" >> $GITHUB_ENV
+    #     echo "SEMMLE_PRELOAD_libtrace=" >> $GITHUB_ENV
+    #     echo "SEMMLE_PRELOAD_libtrace32=" >> $GITHUB_ENV
+    #     echo "SEMMLE_PRELOAD_libtrace64=" >> $GITHUB_ENV
+    #     echo "CODEQL_PLATFORM=linux64" >> $GITHUB_ENV
+    #     echo "CODEQL_ISATTY=stderr" >> $GITHUB_ENV
+    #     echo "CODEQL_DIST=/workspace/codeql" >> $GITHUB_ENV
+    #     echo "CODEQL_SCRATCH_DIR=" >> $GITHUB_ENV
+    #     echo "CODEQL_PLATFORM_DLL_EXTENSION=" >> $GITHUB_ENV
+    #     echo "CODEQL_JAVA_HOME=" >> $GITHUB_ENV
+    #     echo "CODEQL_EXTRACTOR_JAVA_ROOT=" >> $GITHUB_ENV
+    #     echo "CODEQL_EXTRACTOR_JAVA_WIP_DATABASE=" >> $GITHUB_ENV
+    #     echo "CODEQL_EXTRACTOR_JAVA_LOG_DIR=" >> $GITHUB_ENV
+    #     echo "CODEQL_EXTRACTOR_JAVA_SCRATCH_DIR=" >> $GITHUB_ENV
+    #     echo "CODEQL_EXTRACTOR_JAVA_TRAP_DIR=" >> $GITHUB_ENV
+    #     echo "CODEQL_EXTRACTOR_JAVA_SOURCE_ARCHIVE_DIR=" >> $GITHUB_ENV
+    #     echo "LD_PRELOAD=" >> $GITHUB_ENV
 
-    - name: List environment (after trying again to End tracing)
-      run: |
-        echo "env vars with CODEQL:"
-        env | grep CODEQL
-        echo "env vars with SEMMLE:"
-        env | grep SEMMLE
-        echo "env var LD_PRELOAD:"
-        env | grep LD_PRELOAD
+    # - name: List environment (after trying again to End tracing)
+    #   run: |
+    #     echo "env vars with CODEQL:"
+    #     env | grep CODEQL
+    #     echo "env vars with SEMMLE:"
+    #     env | grep SEMMLE
+    #     echo "env var LD_PRELOAD:"
+    #     env | grep LD_PRELOAD
+
+    - name: Delombok
+      uses: advanced-security/delombok@main
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
 
-    - name: List environment (after CodeQL Analysis)
-      run: |
-        echo "env vars with CODEQL:"
-        env | grep CODEQL
-        echo "env vars with SEMMLE:"
-        env | grep SEMMLE
-        echo "env var LD_PRELOAD:"
-        env | grep LD_PRELOAD
+    # - name: List environment (after CodeQL Analysis)
+    #   run: |
+    #     echo "env vars with CODEQL:"
+    #     env | grep CODEQL
+    #     echo "env vars with SEMMLE:"
+    #     env | grep SEMMLE
+    #     echo "env var LD_PRELOAD:"
+    #     env | grep LD_PRELOAD
 
 
 # Misc:
