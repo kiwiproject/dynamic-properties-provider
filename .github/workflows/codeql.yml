@@ -33,14 +33,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
         queries: security-extended,security-and-quality
 
-    # Use cache of Maven repository
     - name: Cache Maven packages
       uses: actions/cache@v3
       with:
@@ -48,7 +46,6 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
-    # Delombok before the build
     - name: Delombok
       uses: advanced-security/delombok@main
 
