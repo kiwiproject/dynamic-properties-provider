@@ -1,14 +1,3 @@
-# For most projects, this workflow file will not need changing; you simply need
-# to commit it to your repository.
-#
-# You may wish to alter this file to override the set of languages analyzed,
-# or to provide custom queries or build logic.
-#
-# ******** NOTE ********
-# We have attempted to detect the languages in your repository. Please check
-# the `language` matrix defined below to confirm you have the correct set of
-# supported CodeQL languages.
-#
 name: "CodeQL"
 
 on:
@@ -37,68 +26,17 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'java' ]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-        # Use only 'java' to analyze code written in Java, Kotlin or both
-        # Use only 'javascript' to analyze code written in JavaScript, TypeScript or both
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
-    - name: Debugging stuff
-      run: |
-        echo "working dir: `pwd`"
-        echo "finding java-code-scanning.qls"
-        find /home/runner/work -name java-code-scanning.qls
-        find /opt/hostedtoolcache/CodeQL/ -name java-code-scanning.qls
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-        # If you wish to specify custom queries, you can do so here or in a config file.
-        # By default, queries listed here will override any specified in a config file.
-        # Prefix the list here with "+" to use these queries and those in the config file.
-
-        # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-        # queries: security-extended,security-and-quality
-
-    # - name: List environment (after codeql-action-init and before custom build)
-    #   run: |
-    #     echo "env vars with CODEQL:"
-    #     env | grep CODEQL
-    #     echo "env vars with SEMMLE:"
-    #     env | grep SEMMLE
-    #     echo "env var LD_PRELOAD:"
-    #     env | grep LD_PRELOAD
-    #     echo "what's in /home/runner/work/_temp/codeql_databases?"
-    #     ls -l /home/runner/work/_temp/codeql_databases
-    #     echo "try to find tracingEnvironment..."
-    #     find /home/runner -name tracingEnvironment
-    #     echo "try to find any files with tracing in their name:"
-    #     find /home/runner -type f -name "*tracing*"
-
-    # - name: More Debugging stuff
-    #   run: |
-    #     echo "working dir: `pwd`"
-    #     echo "Try to find java-code-scanning.qls (again)"
-    #     find /home/runner/work -name java-code-scanning.qls
-    #     find /opt/hostedtoolcache/CodeQL/ -name java-code-scanning.qls
-    #     echo "java-code-scanning.qls:"
-    #     cat /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-queries/0.5.0/codeql-suites/java-code-scanning.qls
-    #     echo "-- java-code-scanning.qls:"
-    #     echo "list /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks"
-    #     ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks
-    #     echo "list /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all"
-    #     ls -l /opt/hostedtoolcache/CodeQL/0.0.0-20230105/x64/codeql/qlpacks/codeql/java-all
-    #     echo "list CODEQL_EXTRACTOR_JAVA_WIP_DATABASE dir:"
-    #     ls -lR $CODEQL_EXTRACTOR_JAVA_WIP_DATABASE
-    #     echo "try to find tracingEnvironment..."
-    #     find /home/runner -name tracingEnvironment
-    #     echo "try to find any files with tracking in their name:"
-    #     find /home/runner -type f -name "*tracing*"
+        queries: security-extended,security-and-quality
 
     # Use cache of Maven repository
     - name: Cache Maven packages
@@ -108,162 +46,14 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
-    # Let's try to delombok **before** the build...I'm sure this won't work either...
+    # Delombok before the build
     - name: Delombok
       uses: advanced-security/delombok@main
 
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2
-
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-
-    #   If the Autobuild fails above, remove it and uncomment the following three lines.
-    #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
-
-    # - run: |
-    #     echo "Run, Build Application using script"
-    #     ./location_of_script_within_repo/buildscript.sh
-
-    # - name: Build code
-    #   run: |
-    #     echo "Build with maven using codeql profile"
-    #     mvn -Pcodeql -B -V -e -Denforcer.skip -DskipTests clean package
-    #     echo "Remove 'Generated by delombok' lines from source files"
-    #     find target/generated-sources/delombok -name '*.java' -exec sed '/Generated by delombok/d' -i '{}' ';'
-    #     find target/generated-test-sources/delombok -name '*.java' -exec sed '/Generated by delombok/d' -i '{}' ';'
-    #     echo "Copy delomboked files back to original source directories"
-    #     cp -R target/generated-sources/delombok/* src/main/java/
-    #     echo "First lines of Property.java which should be the delomboked version:"
-    #     head src/main/java/org/kiwiproject/dynamicproperties/Property.java
-    #     cp -R target/generated-test-sources/delombok/* src/test/java/
-    #     echo "First lines of Department.java which should be the delomboked version:"
-    #     cat src/test/java/org/kiwiproject/dynamicproperties/data/Department.java
-
-    # - name: Build
-    #   run: ./build-for-codeql.sh
-
-    # - name: List environment (after custom build)
-    #   run: |
-    #     echo "env vars with CODEQL:"
-    #     env | grep CODEQL
-    #     echo "env vars with SEMMLE:"
-    #     env | grep SEMMLE
-    #     echo "env var LD_PRELOAD:"
-    #     env | grep LD_PRELOAD
-    #     echo "try to find tracingEnvironment..."
-    #     find /home/runner -name tracingEnvironment
-    #     echo "try to find any files with tracking in their name:"
-    #     find /home/runner -type f -name "*tracing*"
-
-    # - name: End tracing
-    #   run : source /home/runner/work/_temp/codeql_databases/temp/tracingEnvironment/end-tracing.sh
-
-    # - name: List environment (after End tracing)
-    #   run: |
-    #     echo "env vars with CODEQL:"
-    #     env | grep CODEQL
-    #     echo "env vars with SEMMLE:"
-    #     env | grep SEMMLE
-    #     echo "env var LD_PRELOAD:"
-    #     env | grep LD_PRELOAD
-
-    # - name: Try to end tracing (again)
-    #   run: |
-    #     echo "CODEQL_TRACER_LOG=" >> $GITHUB_ENV
-    #     echo "CODEQL_TRACER_LANGUAGES=" >> $GITHUB_ENV
-    #     echo "SEMMLE_PRELOAD_libtrace=" >> $GITHUB_ENV
-    #     echo "SEMMLE_PRELOAD_libtrace32=" >> $GITHUB_ENV
-    #     echo "SEMMLE_PRELOAD_libtrace64=" >> $GITHUB_ENV
-    #     echo "CODEQL_PLATFORM=linux64" >> $GITHUB_ENV
-    #     echo "CODEQL_ISATTY=stderr" >> $GITHUB_ENV
-    #     echo "CODEQL_DIST=/workspace/codeql" >> $GITHUB_ENV
-    #     echo "CODEQL_SCRATCH_DIR=" >> $GITHUB_ENV
-    #     echo "CODEQL_PLATFORM_DLL_EXTENSION=" >> $GITHUB_ENV
-    #     echo "CODEQL_JAVA_HOME=" >> $GITHUB_ENV
-    #     echo "CODEQL_EXTRACTOR_JAVA_ROOT=" >> $GITHUB_ENV
-    #     echo "CODEQL_EXTRACTOR_JAVA_WIP_DATABASE=" >> $GITHUB_ENV
-    #     echo "CODEQL_EXTRACTOR_JAVA_LOG_DIR=" >> $GITHUB_ENV
-    #     echo "CODEQL_EXTRACTOR_JAVA_SCRATCH_DIR=" >> $GITHUB_ENV
-    #     echo "CODEQL_EXTRACTOR_JAVA_TRAP_DIR=" >> $GITHUB_ENV
-    #     echo "CODEQL_EXTRACTOR_JAVA_SOURCE_ARCHIVE_DIR=" >> $GITHUB_ENV
-    #     echo "LD_PRELOAD=" >> $GITHUB_ENV
-
-    # - name: List environment (after trying again to End tracing)
-    #   run: |
-    #     echo "env vars with CODEQL:"
-    #     env | grep CODEQL
-    #     echo "env vars with SEMMLE:"
-    #     env | grep SEMMLE
-    #     echo "env var LD_PRELOAD:"
-    #     env | grep LD_PRELOAD
-
-    # - name: Delombok
-    #   uses: advanced-security/delombok@main
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
-
-    # - name: List environment (after CodeQL Analysis)
-    #   run: |
-    #     echo "env vars with CODEQL:"
-    #     env | grep CODEQL
-    #     echo "env vars with SEMMLE:"
-    #     env | grep SEMMLE
-    #     echo "env var LD_PRELOAD:"
-    #     env | grep LD_PRELOAD
-
-
-# Misc:
-#  --search-path=/home/gitpod/.codeql/packages/codeql/java-queries:/home/gitpod/.codeql/packages/codeql/suite-helpers/
-
-
-# The following work locally.
-
-# 1. With Autobuild - run analysis locally using autobuild
-
-# -- create database
-# codeql database create /workspace/db/java --language=java
-
-# -- analyze #1
-# codeql database analyze  --format=csv --output=codeql-results.csv /workspace/db/java codeql/java-queries
-
-# -- analyze #2
-# codeql database analyze  --format=csv --output=codeql-results.csv /workspace/db/java /home/gitpod/.codeql/packages/codeql/java-queries/0.5.1/codeql-suites/java-lgtm-full.qls
-
-# --print baseline info
-# codeql database print-baseline /workspace/db/java
-
-
-# 2. With Custom build - run analysis locally using custom build
-
-# -- create-database
-# codeql database init --language=java --begin-tracing --source-root=/workspace/dynamic-properties-provider  /workspace/db/java
-
-# -- start tracing
-# source /workspace/db/java/temp/tracingEnvironment/start-tracing.sh
-
-# -- run custom build
-# ./build-for-codeql.sh
-
-# -- end tracing
-# source /workspace/db/java/temp/tracingEnvironment/end-tracing.sh
-
-# -- finalize database
-# codeql database finalize /workspace/db/java
-
-# -- analyze #1
-# codeql database analyze  --format=csv --output=codeql-results.csv /workspace/db/java codeql/java-queries
-
-# -- analyze #2
-# codeql database analyze  --format=csv --output=codeql-results.csv /workspace/db/java /home/gitpod/.codeql/packages/codeql/java-queries/0.5.1/codeql-suites/java-lgtm-full.qls
-
-# --print baseline info
-# codeql database print-baseline /workspace/db/java
-
-
-# How to do the above in GitHub actions???
