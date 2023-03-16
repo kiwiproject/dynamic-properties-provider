@@ -5,7 +5,7 @@
 [![CodeQL](https://github.com/kiwiproject/kiwi-test/actions/workflows/codeql.yml/badge.svg)](https://github.com/kiwiproject/kiwi-test/actions/workflows/codeql.yml)
 [![javadoc](https://javadoc.io/badge2/org.kiwiproject/dynamic-properties-provider/javadoc.svg)](https://javadoc.io/doc/org.kiwiproject/dynamic-properties-provider)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Maven Central](https://img.shields.io/maven-central/v/org.kiwiproject/dynamic-properties-provider)](https://search.maven.org/search?q=g:org.kiwiproject%20a:dynamic-properties-provider)
+[![Maven Central](https://img.shields.io/maven-central/v/org.kiwiproject/dynamic-properties-provider)](https://central.sonatype.com/artifact/org.kiwiproject/dynamic-properties-provider/0.7.0)
 
 Dynamic Properties Provider is a utility library to assist in the generation of field definitions based on model classes.
 This process is helpful if a UI needs to build dynamic forms based on models in a service but don't want to hardcode
