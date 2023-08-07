@@ -5,14 +5,14 @@ import static java.util.stream.Collectors.toMap;
 import static org.kiwiproject.base.KiwiStrings.f;
 import static org.kiwiproject.jaxrs.KiwiStandardResponses.standardNotFoundResponse;
 
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.kiwiproject.dynamicproperties.PropertyExtractor;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.Map;
 import java.util.Map.Entry;
 

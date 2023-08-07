@@ -2,13 +2,11 @@ package org.kiwiproject.dynamicproperties;
 
 import static java.util.Arrays.stream;
 import static java.util.Collections.emptyList;
-import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.kiwiproject.reflect.KiwiReflection.nonStaticFieldsInHierarchy;
 
 import lombok.experimental.UtilityClass;
-
 import org.kiwiproject.dynamicproperties.annotation.ChoiceSupplier;
 import org.kiwiproject.dynamicproperties.annotation.DynamicField;
 import org.kiwiproject.dynamicproperties.annotation.EnumUnit;
@@ -28,7 +26,7 @@ public class PropertyExtractor {
         return nonStaticFieldsInHierarchy(clazz).stream()
                 .filter(field -> isNotEmpty(field.getAnnotationsByType(DynamicField.class)))
                 .map(PropertyExtractor::convertFieldToProperty)
-                .collect(toList());
+                .toList();
     }
 
     private static Property convertFieldToProperty(Field field) {
@@ -95,7 +93,7 @@ public class PropertyExtractor {
         return stream(enumClass.getEnumConstants())
                 .filter(val -> val instanceof Enum)
                 .map(val -> ((Enum<?>) val).name())
-                .collect(toList());
+                .toList();
     }
 
     private static DynamicField findDynamicFieldAnnotation(Field field) {
