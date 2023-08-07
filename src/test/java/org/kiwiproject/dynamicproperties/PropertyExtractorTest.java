@@ -188,7 +188,7 @@ class PropertyExtractorTest {
                     ));
         }
 
-        class TooManyUnits {
+        static class TooManyUnits {
 
             @SuppressWarnings("unused")
             @DynamicField
@@ -204,7 +204,7 @@ class PropertyExtractorTest {
                     .hasMessage("@Unit and @EnumUnit are mutually exclusive but both exist.");
         }
 
-        class InvalidUnitDefault {
+        static class InvalidUnitDefault {
 
             @DynamicField
             @Unit(value = {"foo"}, defaultValue = "bar")
@@ -219,7 +219,7 @@ class PropertyExtractorTest {
                     .hasMessage("Unit default value is not a valid value.");
         }
 
-        class InvalidEnumUnitDefault {
+        static class InvalidEnumUnitDefault {
 
             @DynamicField
             @EnumUnit(value = Education.class, defaultValue = "KINDERGARTEN")
@@ -270,11 +270,11 @@ class PropertyExtractorTest {
                     .contains(departmentProperty);
         }
 
-        class TooManyChoices {
+        static class TooManyChoices {
             @DynamicField(choices = {"one", "two"}, choiceSupplier = TooManyChoicesSupplier.class)
             private String thereCanBeOnlyOne;
 
-            class TooManyChoicesSupplier implements ChoiceSupplier {
+            static class TooManyChoicesSupplier implements ChoiceSupplier {
                 @Override
                 public List<Choice> get() {
                     return List.of();
