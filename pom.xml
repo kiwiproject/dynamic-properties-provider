@@ -36,7 +36,7 @@
         <!-- nothing here yet... -->
 
         <!-- Versions for test dependencies -->
-        <kiwi-test.version>3.0.1</kiwi-test.version>
+        <kiwi-test.version>3.1.0</kiwi-test.version>
 
         <!-- Sonar properties -->
         <sonar.projectKey>kiwiproject_dynamic-properties-provider</sonar.projectKey>
