@@ -1,5 +1,5 @@
 ### Dynamic Properties Provider
-[![Build](https://github.com/kiwiproject/dynamic-properties-provider/workflows/build/badge.svg)](https://github.com/kiwiproject/dynamic-properties-provider/actions?query=workflow%3Abuild)
+[![Build](https://github.com/kiwiproject/dynamic-properties-provider/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/kiwiproject/dynamic-properties-provider/actions/workflows/build.yml?query=branch%3Amain)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kiwiproject_dynamic-properties-provider&metric=alert_status)](https://sonarcloud.io/dashboard?id=kiwiproject_dynamic-properties-provider)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=kiwiproject_dynamic-properties-provider&metric=coverage)](https://sonarcloud.io/dashboard?id=kiwiproject_dynamic-properties-provider)
 [![CodeQL](https://github.com/kiwiproject/kiwi-test/actions/workflows/codeql.yml/badge.svg)](https://github.com/kiwiproject/kiwi-test/actions/workflows/codeql.yml)
