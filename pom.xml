@@ -40,8 +40,6 @@
 
         <!-- Sonar properties -->
         <sonar.projectKey>kiwiproject_dynamic-properties-provider</sonar.projectKey>
-        <sonar.organization>kiwiproject</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencyManagement>
